@@ -80,19 +80,19 @@ const appMenuItems = [
           {
             name: 'Contas',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contascontab/contas`,
+            link: `/main-menu/cadastro/contas-contabeis/contas`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Contas Complementar',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contascontab/contascomplement`,
+            link: `/main-menu/cadastro/contas-contabeis/contascomplement`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Centro de Custo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contascontab/cdc`,
+            link: `/main-menu/cadastro/contas-contabeis/cdc`,
             Icon: CreateNewFolderIcon,
           },
         ],
@@ -105,19 +105,19 @@ const appMenuItems = [
           {
             name: 'Minuta Padrão Compra e Venda',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contascontab/contas`,
+            link: `/main-menu/cadastro/minutas-padrao/minutapadraocv`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Minuta Padrão Contrato de Locação',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contascontab/contascomplement`,
+            link: `/main-menu/cadastro/minutas-padrao/minutapadraolocacao`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Minuta de Contrato de  Prestação de Serviços',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contascontab/cdc`,
+            link: `/main-menu/cadastro/minutas-padrao/minutacontratoprestserv`,
             Icon: CreateNewFolderIcon,
           },
         ],
@@ -130,13 +130,13 @@ const appMenuItems = [
           {
             name: 'Novo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/usuarios/${'new'}`,
+            link: `/main-menu/cadastro/enderecos/${'new'}`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Editar',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/usuarios/${'edit'}`,
+            link: `/main-menu/cadastro/enderecos/${'edit'}`,
             Icon: EditIcon,
           },
         ],
@@ -148,51 +148,51 @@ const appMenuItems = [
     Icon: InsertDriveFileIcon,
     items: [
       {
-        name: 'Cadastro de Compra e Venda',
+        name: 'Contrato de Compra e Venda',
         sx: { pl: 4 },
         Icon: SummarizeIcon,
         items: [
           {
             name: 'Novo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadcv/${'new'}`,
+            link: `/main-menu/operacoes/contratocv/${'new'}`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Consulta/Valida/Cancela',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadcv/cvc`,
+            link: `/main-menu/operacoes/contratocv/${'cvc'}`,
             Icon: FactCheckIcon,
           },
           {
             name: 'Editar Rascunho',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadcv/${'edit'}`,
+            link: `/main-menu/operacoes/contratocv/${'edit'}`,
             Icon: EditIcon,
           },
         ],
       },
       {
-        name: 'Cadastro de Locação',
+        name: 'Contrato de Locação',
         sx: { pl: 4 },
         Icon: SummarizeIcon,
         items: [
           {
             name: 'Novo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'new'}`,
+            link: `/main-menu/operacoes/contrato-locacao/${'new'}`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Consulta/Valida/Cancela',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/cvc`,
+            link: `/main-menu/operacoes/contrato-locacao/${'cvc'}`,
             Icon: FactCheckIcon,
           },
           {
             name: 'Editar Rascunho',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'edit'}`,
+            link: `/main-menu/operacoes/contrato-locacao/${'edit'}`,
             Icon: EditIcon,
           },
         ],
@@ -205,19 +205,19 @@ const appMenuItems = [
           {
             name: 'Novo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'new'}`,
+            link: `/main-menu/operacoes/ordem-de-servico/${'new'}`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Consulta/Valida/Cancela',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/cvc`,
+            link: `/main-menu/operacoes/ordem-de-servico/${'cvc'}`,
             Icon: FactCheckIcon,
           },
           {
             name: 'Editar Rascunho',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'edit'}`,
+            link: `/main-menu/operacoes/ordem-de-servico/${'edit'}`,
             Icon: EditIcon,
           },
         ],
@@ -230,13 +230,13 @@ const appMenuItems = [
           {
             name: 'Novo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'new'}`,
+            link: `/main-menu/operacoes/lancamento-contabil/${'new'}`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Editar Rascunho',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'edit'}`,
+            link: `/main-menu/operacoes/lancamento-contabil/${'edit'}`,
             Icon: EditIcon,
           },
         ],
@@ -249,13 +249,13 @@ const appMenuItems = [
           {
             name: 'Novo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'new'}`,
+            link: `/main-menu/operacoes/lancamento-bancos/${'new'}`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Editar Rascunho',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/cadlocal/${'edit'}`,
+            link: `/main-menu/operacoes/lancamento-bancos/${'edit'}`,
             Icon: EditIcon,
           },
         ],
@@ -268,7 +268,7 @@ const appMenuItems = [
           {
             name: 'Gerar',
             sx: { pl: 6 },
-            link: `/main-menu/operacoes/are/gerar`,
+            link: `/main-menu/operacoes/are`,
             Icon: CreateNewFolderIcon,
           }
         ],
@@ -283,7 +283,7 @@ const appMenuItems = [
         name: 'Pesquisa Por Campo',
         sx: { pl: 4 },
         Icon: IconBarChart,
-        link: `/main-menu/relatorios/pesqcampo`
+        link: `/main-menu/relatorios/pesquisa-por-campo`
       },
       {
         name: 'Lançamento',
@@ -295,7 +295,7 @@ const appMenuItems = [
         name: 'Livro Razão',
         sx: { pl: 4 },
         Icon: IconBarChart,
-        link: `/main-menu/relatorios/livrorazao`
+        link: `/main-menu/relatorios/livro-razao`
       },
       {
         name: 'DRE',
@@ -314,7 +314,7 @@ const appMenuItems = [
   },
   {
     name: 'Logout',
-    link: '/reports',
+    link: '/login',
     Icon: LogoutIcon,
   },
 
@@ -376,7 +376,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 const AppMenu = (props: any) => {
 
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
 
 
   const handleDrawerOpen = () => {

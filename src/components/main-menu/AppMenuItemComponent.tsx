@@ -36,7 +36,7 @@ const AppMenuItemComponent = (props: AppMenuItemComponentProps) => {
             <ListItemButton
                 sx={sx}
                 children={children}
-                component={forwardRef((props: NavLinkProps) => <NavLink {...props}  />)}
+                component={forwardRef((props: NavLinkProps , ref: any) => <NavLink {...props }  />)}
                 to={link}
             />
     )
