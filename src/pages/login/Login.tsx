@@ -44,25 +44,18 @@ const Login = () => {
 
     });
 
-    // const handleChange = ( event: React.ChangeEvent<any>) => {
-    //     setFieldValue(name, value);
-    // }
-
-
-    // const handleChange = (e: React.ChangeEvent<any>) => {
-
-    // }
-
 
     return (
 
         <Formik
             initialValues={initialValues}
             validationSchema={LoginSchema}
-            onSubmit={async (values) => {
-                await new Promise((r) => setTimeout(r, 500));
-                alert(JSON.stringify(values, null, 2));
-            }}
+            onSubmit={(values, actions) => {
+                console.log("values", values);
+                //logar(values);
+                actions.resetForm();
+                navigate('/main-menu', {replace: true});
+              }}
         >
             {({
                 values,
