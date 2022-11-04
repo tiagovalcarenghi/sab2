@@ -1,5 +1,5 @@
-import { Typography } from "@mui/material";
 import AppMenu from "../../components/main-menu/AppMenu";
+import Rotas from "../../routes/rotas";
 
 const MainMenu = () => {
 
@@ -7,8 +7,9 @@ const MainMenu = () => {
     return (
         <>
             <AppMenu >
-                <Typography>Bem-Vindo ao SAB.</Typography>
-            </AppMenu>
+               <Rotas />
+               </AppMenu>
+            
         </>
     )
 

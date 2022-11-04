@@ -1,7 +1,7 @@
 import ListItemButton from '@mui/material/ListItemButton';
-import  React, { forwardRef } from 'react'
+import  React from 'react'
 import { SxProps, Theme } from '@mui/material/styles';
-import { NavLink, NavLinkProps } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 
 interface AppMenuItemComponentProps {
@@ -15,6 +15,7 @@ interface AppMenuItemComponentProps {
 const AppMenuItemComponent = (props: AppMenuItemComponentProps) => {
 
     const { sx, onClick, link, children} = props;
+
 
 
     // If link is not set return the orinary ListItem
@@ -36,7 +37,7 @@ const AppMenuItemComponent = (props: AppMenuItemComponentProps) => {
             <ListItemButton
                 sx={sx}
                 children={children}
-                component={forwardRef((props: NavLinkProps , ref: any) => <NavLink {...props }  />)}
+                component={Link}
                 to={link}
             />
     )

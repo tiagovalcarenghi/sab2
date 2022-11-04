@@ -1,5 +1,4 @@
 import { useRoutes } from 'react-router-dom/dist';
-import Login from '../pages/login/Login';
 import CentrodeCusto from '../pages/main-menu/cadastro/contas-contabeis/CentrodeCusto';
 import Contas from '../pages/main-menu/cadastro/contas-contabeis/Contas';
 import ContasComplementar from '../pages/main-menu/cadastro/contas-contabeis/ContasComplementar';
@@ -9,7 +8,6 @@ import MinutaPadraoCV from '../pages/main-menu/cadastro/minutas-padrao/MinutaPad
 import MinutaPadraoLocacao from '../pages/main-menu/cadastro/minutas-padrao/MinutaPadraoLocacao';
 import Pessoas from '../pages/main-menu/cadastro/pessoas/Pessoas';
 import Usuarios from '../pages/main-menu/cadastro/usuarios/Usuarios';
-import MainMenu from '../pages/main-menu/MainMenu';
 import Are from '../pages/main-menu/operacoes/are/Are';
 import ContratoLocacao from '../pages/main-menu/operacoes/contrato-locacao/ContratoLocacao';
 import ContratoCV from '../pages/main-menu/operacoes/contratocv/ContratoCV';
@@ -25,40 +23,26 @@ import PesquisaPorCampo from '../pages/main-menu/relatorios/pesquisa-por-campo/P
 
 
 const Rotas = () => useRoutes([
-    { path: "/", element: <Login /> },
-    { path: "/login", element: <Login /> },
-    { path: "/sab", element: <Login /> },
-    { path: "/main-menu", element: <MainMenu /> },
-
-    { path: "/main-menu/cadastro/pessoas/:edit", element: <Pessoas /> },
-
-    { path: "/main-menu/cadastro/usuarios/:edit", element: <Usuarios /> },
-
-    { path: "/main-menu/cadastro/contas-contabeis/contas", element: <Contas /> },
-    { path: "/main-menu/cadastro/contas-contabeis/contascomplement", element: <ContasComplementar /> },
-    { path: "/main-menu/cadastro/contas-contabeis/cdc", element: <CentrodeCusto /> },
-
-    { path: "/main-menu/cadastro/minutas-padrao/minutacontratoprestserv", element: <MinutaContratoPrestServ /> },
-    { path: "/main-menu/cadastro/minutas-padrao/minutapadraocv", element: <MinutaPadraoCV /> },
-    { path: "/main-menu/cadastro/minutas-padrao/minutapadraolocacao", element: <MinutaPadraoLocacao /> },
-
-    { path: "/main-menu/cadastro/enderecos/:edit", element: <Enderecos /> },
-
-
-    { path: "/main-menu/operacoes/contrato-locacao/:edit", element: <ContratoLocacao /> },
-    { path: "/main-menu/operacoes/contratocv/:edit", element: <ContratoCV /> },
-    { path: "/main-menu/operacoes/lancamento-bancos/:edit", element: <LancamentoBancos /> },
-    { path: "/main-menu/operacoes/lancamento-contabil/:edit", element: <LancamentoContabil /> },
-    { path: "/main-menu/operacoes/ordem-de-servico/:edit", element: <OrdedemServico /> },
-    { path: "/main-menu/operacoes/are", element: <Are /> },
-
-    { path: "/main-menu/relatorios/balancete", element: <Balancete /> },
-    { path: "/main-menu/relatorios/dre", element: <Dre /> },
-    { path: "/main-menu/relatorios/lancamento", element: <Lancamento /> },
-    { path: "/main-menu/relatorios/livro-razao", element: <LivroRazao /> },
-    { path: "/main-menu/relatorios/pesquisa-por-campo", element: <PesquisaPorCampo /> },
-
-
+    { path: "cadastro/pessoas", element: <Pessoas /> },
+    { path: "cadastro/usuarios", element: <Usuarios /> },
+    { path: "cadastro/contas-contabeis/contas", element: <Contas /> },
+    { path: "cadastro/contas-contabeis/contascomplement", element: <ContasComplementar /> },
+    { path: "cadastro/contas-contabeis/cdc", element: <CentrodeCusto /> },
+    { path: "cadastro/minutas-padrao/minutacontratoprestserv", element: <MinutaContratoPrestServ /> },
+    { path: "cadastro/minutas-padrao/minutapadraocv", element: <MinutaPadraoCV /> },
+    { path: "cadastro/minutas-padrao/minutapadraolocacao", element: <MinutaPadraoLocacao /> },
+    { path: "cadastro/enderecos", element: <Enderecos /> },
+    { path: "operacoes/contrato-locacao", element: <ContratoLocacao /> },
+    { path: "operacoes/contratocv", element: <ContratoCV /> },
+    { path: "operacoes/lancamento-bancos", element: <LancamentoBancos /> },
+    { path: "operacoes/lancamento-contabil", element: <LancamentoContabil /> },
+    { path: "operacoes/ordem-de-servico", element: <OrdedemServico /> },
+    { path: "operacoes/are", element: <Are /> },
+    { path: "relatorios/balancete", element: <Balancete /> },
+    { path: "relatorios/dre", element: <Dre /> },
+    { path: "relatorios/lancamento", element: <Lancamento /> },
+    { path: "relatorios/livro-razao", element: <LivroRazao /> },
+    { path: "relatorios/pesquisa-por-campo", element: <PesquisaPorCampo /> },
 
 ]);
 

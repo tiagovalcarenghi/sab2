@@ -16,8 +16,6 @@ import AppMenuItem from './AppMenuItem';
 import IconBarChart from '@material-ui/icons/BarChart'
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
 import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import EditIcon from '@mui/icons-material/Edit';
-import FactCheckIcon from '@mui/icons-material/FactCheck';
 import BadgeIcon from '@mui/icons-material/Badge';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import SummarizeIcon from '@mui/icons-material/Summarize';
@@ -38,39 +36,13 @@ const appMenuItems = [
         name: 'Pessoas',
         sx: { pl: 4 },
         Icon: BadgeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/cadastro/pessoas/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Editar',
-            sx: { pl: 6 },
-            link: `/main-menu/cadastro/pessoas/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `cadastro/pessoas`,
       },
       {
         name: 'Usuários',
         sx: { pl: 4 },
         Icon: BadgeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/cadastro/usuarios/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Editar',
-            sx: { pl: 6 },
-            link: `/main-menu/cadastro/usuarios/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `cadastro/usuarios`,
       },
       {
         name: 'Contas Contábeis',
@@ -80,19 +52,19 @@ const appMenuItems = [
           {
             name: 'Contas',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contas-contabeis/contas`,
+            link: `cadastro/contas-contabeis/contas`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Contas Complementar',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contas-contabeis/contascomplement`,
+            link: `cadastro/contas-contabeis/contascomplement`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Centro de Custo',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/contas-contabeis/cdc`,
+            link: `cadastro/contas-contabeis/cdc`,
             Icon: CreateNewFolderIcon,
           },
         ],
@@ -105,19 +77,19 @@ const appMenuItems = [
           {
             name: 'Minuta Padrão Compra e Venda',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/minutas-padrao/minutapadraocv`,
+            link: `cadastro/minutas-padrao/minutapadraocv`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Minuta Padrão Contrato de Locação',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/minutas-padrao/minutapadraolocacao`,
+            link: `cadastro/minutas-padrao/minutapadraolocacao`,
             Icon: CreateNewFolderIcon,
           },
           {
             name: 'Minuta de Contrato de  Prestação de Serviços',
             sx: { pl: 6 },
-            link: `/main-menu/cadastro/minutas-padrao/minutacontratoprestserv`,
+            link: `cadastro/minutas-padrao/minutacontratoprestserv`,
             Icon: CreateNewFolderIcon,
           },
         ],
@@ -126,20 +98,7 @@ const appMenuItems = [
         name: 'Endereços',
         sx: { pl: 4 },
         Icon: BadgeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/cadastro/enderecos/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Editar',
-            sx: { pl: 6 },
-            link: `/main-menu/cadastro/enderecos/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `cadastro/enderecos`,
       },
     ],
   },
@@ -151,114 +110,31 @@ const appMenuItems = [
         name: 'Contrato de Compra e Venda',
         sx: { pl: 4 },
         Icon: SummarizeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/contratocv/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Consulta/Valida/Cancela',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/contratocv/${'cvc'}`,
-            Icon: FactCheckIcon,
-          },
-          {
-            name: 'Editar Rascunho',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/contratocv/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `operacoes/contratocv`,
       },
       {
         name: 'Contrato de Locação',
         sx: { pl: 4 },
         Icon: SummarizeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/contrato-locacao/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Consulta/Valida/Cancela',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/contrato-locacao/${'cvc'}`,
-            Icon: FactCheckIcon,
-          },
-          {
-            name: 'Editar Rascunho',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/contrato-locacao/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `operacoes/contrato-locacao`,
       },
       {
         name: 'Ordem de Serviço',
         sx: { pl: 4 },
         Icon: SummarizeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/ordem-de-servico/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Consulta/Valida/Cancela',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/ordem-de-servico/${'cvc'}`,
-            Icon: FactCheckIcon,
-          },
-          {
-            name: 'Editar Rascunho',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/ordem-de-servico/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `operacoes/ordem-de-servico`,
       },
       {
         name: 'Lançamento Contábil',
         sx: { pl: 4 },
         Icon: SummarizeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/lancamento-contabil/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Editar Rascunho',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/lancamento-contabil/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `operacoes/lancamento-contabil`,
       },
       {
         name: 'Lançamento Bancos',
         sx: { pl: 4 },
         Icon: SummarizeIcon,
-        items: [
-          {
-            name: 'Novo',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/lancamento-bancos/${'new'}`,
-            Icon: CreateNewFolderIcon,
-          },
-          {
-            name: 'Editar Rascunho',
-            sx: { pl: 6 },
-            link: `/main-menu/operacoes/lancamento-bancos/${'edit'}`,
-            Icon: EditIcon,
-          },
-        ],
+        link: `operacoes/lancamento-bancos`,
       },
       {
         name: 'ARE',
@@ -268,7 +144,7 @@ const appMenuItems = [
           {
             name: 'Gerar',
             sx: { pl: 6 },
-            link: `/main-menu/operacoes/are`,
+            link: `operacoes/are`,
             Icon: CreateNewFolderIcon,
           }
         ],
@@ -283,38 +159,38 @@ const appMenuItems = [
         name: 'Pesquisa Por Campo',
         sx: { pl: 4 },
         Icon: IconBarChart,
-        link: `/main-menu/relatorios/pesquisa-por-campo`
+        link: `relatorios/pesquisa-por-campo`
       },
       {
         name: 'Lançamento',
         sx: { pl: 4 },
         Icon: IconBarChart,
-        link: `/main-menu/relatorios/lancamento`
+        link: `relatorios/lancamento`
       },
       {
         name: 'Livro Razão',
         sx: { pl: 4 },
         Icon: IconBarChart,
-        link: `/main-menu/relatorios/livro-razao`
+        link: `relatorios/livro-razao`
       },
       {
         name: 'DRE',
         sx: { pl: 4 },
         Icon: IconBarChart,
-        link: `/main-menu/relatorios/dre`
+        link: `relatorios/dre`
       },
       {
         name: 'Balancete',
         sx: { pl: 4 },
         Icon: IconBarChart,
-        link: `/main-menu/relatorios/balancete`
+        link: `relatorios/balancete`
       },
-      
+
     ],
   },
   {
     name: 'Logout',
-    link: '/login',
+    link: '/',
     Icon: LogoutIcon,
   },
 
