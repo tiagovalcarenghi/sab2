@@ -1,26 +1,114 @@
-import { Typography } from "@material-ui/core";
-import { useEffect } from "react";
-
-
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Form, Formik } from "formik";
+import * as yup from 'yup';
 
 const CadastroPF = (props: any) => {
 
+    const { pessoapf, salvar, limpar } = props;
 
-    const { tipocadastro, salvar, limpar } = props;
+    const theme = createTheme({
 
-    useEffect(() => {
+        palette: {
+            primary: {
+                main: 'rgb(255, 152, 0)',
+            }
+        },
 
-        console.log("Filmes:", tipocadastro);
+    });
 
-    }, [tipocadastro])
+    const initialValues = {
+        usuario: '',
+        senha: ''
+    }
+
+    const LoginSchema = yup.object().shape({
+        usuario: yup.string().required('Informe o seu usuário.'),
+        senha: yup.string().required('Informe a sua senha.'),
+
+    });
+
+
+    const handleNovoFilme = (handleReset: any) => {
+        limpar();
+        handleReset(initialValues);
+    }
 
     return (
 
         <>
+            <Formik
+                initialValues={initialValues}
+                validationSchema={LoginSchema}
+                onSubmit={(values, actions) => {
+                    console.log("values", values);
+                    salvar(values);
+                    setTimeout(() => actions.setSubmitting(false), 5000);
+                    actions.resetForm();
+                }}
 
-            <Typography>
-            CadastroPF {props.tipocadastro}
-            </Typography>
+            >
+                {({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    handleReset
+                }) => (
+
+                    <Form onSubmit={handleSubmit}>
+                        <>
+                            <ThemeProvider theme={theme}>
+                                <CssBaseline />
+                                <Box sx={{ mt: 12 }}>
+                                    <TextField
+                                        margin="normal"
+                                        fullWidth
+                                        value={values.usuario}
+                                        id="usuario"
+                                        label="Usuário"
+                                        name="usuario"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        helperText={touched.usuario && errors.usuario}
+                                    />
+
+                                    <TextField
+                                        margin="normal"
+                                        fullWidth
+                                        value={values.senha}
+                                        name="senha"
+                                        label="Senha"
+                                        type="password"
+                                        id="senha"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        helperText={touched.senha && errors.senha}
+                                    />
+
+                                    <Grid container spacing={2} justifyContent="flex-end">
+                                        <Grid item>
+                                            {<Button variant="contained" onClick={() => { handleNovoFilme(handleReset) }} >Novo</Button>}
+                                        </Grid>
+                                        <Grid item>
+                                            <Button variant="contained" color="primary" type="submit" >Limpar Dados</Button>
+                                        </Grid>
+                                    </Grid>
+                                </Box>
+
+                            </ThemeProvider>
+
+
+                        </>
+                    </Form>
+                )}
+            </Formik >
 
         </>
     );
