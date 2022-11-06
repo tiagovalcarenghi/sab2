@@ -1,4 +1,4 @@
-import * as React from 'react';
+import Swal from 'sweetalert2';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -53,9 +53,21 @@ const Login = () => {
             onSubmit={(values, actions) => {
                 console.log("values", values);
                 //logar(values);
-                actions.resetForm();
-                navigate('/main-menu', {replace: true});
-              }}
+
+                if (values.usuario != 'admin' && values.senha != 'admin') {
+                    Swal.fire({
+                        title: 'Atenção',
+                        text: 'Informe um usuário e senha válidos.',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    })
+
+                } else {
+                    actions.resetForm();
+                    navigate('/main-menu', { replace: true });
+                }
+
+            }}
         >
             {({
                 values,
@@ -102,8 +114,8 @@ const Login = () => {
 
                                         <Box sx={{ mt: 1 }}>
                                             <TextField
-                                               margin="normal"
-                                               fullWidth
+                                                margin="normal"
+                                                fullWidth
                                                 value={values.usuario}
                                                 id="usuario"
                                                 label="Usuário"
