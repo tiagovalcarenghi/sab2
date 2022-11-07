@@ -88,13 +88,6 @@ function Pessoas() {
     };
 
 
-
-    const salvarPF = () => {
-    }
-
-    const limparPF = () => {
-    }
-
     const salvarPJ = () => {
     }
 
@@ -129,7 +122,7 @@ function Pessoas() {
                     onChangeIndex={handleChangeIndex}
                 >
                     <TabPanel value={value} index={0} dir={theme.direction}>
-                        <CadastroPF  salvar={salvarPF} limpar={limparPF} />
+                        <CadastroPF   />
                     </TabPanel>
                     <TabPanel value={value} index={1} dir={theme.direction}>
                         <CadastroPJ  salvar={salvarPJ} limpar={limparPJ} />

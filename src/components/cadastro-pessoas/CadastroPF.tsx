@@ -1,145 +1,92 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
+import { useForm } from "react-hook-form";
+import { FormInputText } from "./form-components/FormInputText";
+import { FormInputDropdown } from "./form-components/FormInputDropdown";
+import { FormValuesPessoaPF, initialValues } from "../../utils/cadastro-pf/constants";
+import { Button, Grid, Paper } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import InputLabel from '@mui/material/InputLabel';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import { estadoCivilNames, initialValues } from '../../utils/cadastro-pf/constants';
-
-const theme = createTheme({
-
-    palette: {
-        primary: {
-            main: 'rgb(255, 152, 0)',
-        }
-    },
-
-});
-
+import { styled } from '@mui/material/styles';
 
 const CadastroPF = (props: any) => {
 
-    const { pessoaPF, salvar, limpar } = props;
 
-    const [estadoCivil, setEstadoCivil] = React.useState('');
+  const theme = createTheme({
 
-    const handleChange2 = (event: SelectChangeEvent) => {
-        setEstadoCivil(event.target.value as string);
-    };
+    palette: {
+      primary: {
+        main: 'rgb(255, 152, 0)',
+      }
+    },
 
+  });
 
-
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            cdEstadoCivil: data.get('cdEstadoCivil'),
-        });
-    };
-
-
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
 
 
+  const methods = useForm<FormValuesPessoaPF>({ defaultValues: initialValues });
+  const { handleSubmit, reset, control } = methods;
+  const onSubmit = (data: FormValuesPessoaPF) => console.log(data);
+
+  return (
+
+    <ThemeProvider theme={theme}>
+
+      <Paper
+        style={{
+          display: "grid",
+          gridRowGap: "20px",
+          padding: "20px",
+
+        }}
+      >
+
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={4}>
+            <FormInputText name="nomeCompleto" control={control} label="Nome Completo" />
+          </Grid>
+          <Grid item xs={4}>
+            <FormInputDropdown
+              name="cdEstadoCivil"
+              control={control}
+              label="Estado Civil"
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <FormInputText name="profissao" control={control} label="Profissão" />
+          </Grid>
+        </Grid>
+
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+          <Grid item xs={4}>
+          <FormInputText name="nacionalidade" control={control} label="Nacionalidade" />
+          </Grid>
+          <Grid item xs={4}>
+          <FormInputText name="ci" control={control} label="Carteira de Idendidade" />
+          </Grid>
+          <Grid item xs={4}>
+            <FormInputText name="profissao" control={control} label="Profissão" />
+          </Grid>
+        </Grid>
+ 
+       
+        <Grid container spacing={2} justifyContent="flex-end">
+          <Grid item>
+            {<Button variant="contained"  type="submit"  onClick={handleSubmit(onSubmit)}  >Salvar</Button>}
+          </Grid>
+          <Grid item>
+            <Button onClick={() => reset()} variant={"outlined"} >Limpar Dados</Button>
+          </Grid>
+        </Grid>
 
 
-    return (
-        <ThemeProvider theme={theme}>
-            <Container component="main">
-                <CssBaseline />
-                <Box
-                    sx={{
-                        
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} >
-                                <TextField
-                                    autoComplete="given-name"
-                                    name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
-                                    label="First Name"
-                                    autoFocus
-                                />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
-                                />
-                            </Grid>
-                            <Grid item xs={12} >
-                                <TextField
-                                    required
-                                    fullWidth
-                                    id="email"
-                                    label="Email Address"
-                                    name="email"
-                                    autoComplete="email"
-                                />
-                            </Grid>
-                            <Grid item xs={12}>
-                                <InputLabel >Estado Civil</InputLabel>
-                                <Select
-                                    fullWidth
-                                    onChange={handleChange2}
-                                    id="cdEstadoCivil"
-                                    label="Estado Civil"
-                                    name="cdEstadoCivil"
-                                    autoComplete="cdEstadoCivil"
-                                    value={estadoCivil}
-                                >
-                                    {estadoCivilNames.map(ec =>
-                                        <MenuItem key={ec.id} value={ec.name}>
-                                            {ec.name}
-                                        </MenuItem>)
-                                    }
-
-
-                                </Select>
-                            </Grid>
-
-                        </Grid>
-
-                        <Grid item xs={11}>
-                            <Grid container spacing={2} justifyContent="flex-end">
-
-                                <Grid item>
-                                    <Button variant="contained" color="primary"
-                                        fullWidth
-                                        sx={{ mt: 3, mb: 2 }} type="submit" >Salvar</Button>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                </Box>
-
-                
-            </Container>
-        </ThemeProvider>
-    );
-}
+      </Paper>
+    </ThemeProvider>
+  );
+};
 
 export default CadastroPF;

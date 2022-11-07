@@ -1,19 +1,23 @@
 export const initialValues = {
   nomeCompleto: '',
-  cdEstadoCivil: ''
+  cdEstadoCivil: '',
+  profissao: '',
+  nacionalidade: '',
+  ci: '',
 }
 
 
 
 export interface FormValuesPessoaPF {
-
-  nomeCompleto: string,
-  cdEstadoCivil: string
+  nomeCompleto: string;
+  cdEstadoCivil: string;
+  profissao: string;
+  nacionalidade: string;
+  ci: string;
 }
 
 
-export const estadoCivilNames = [
- {id: 1, name: "Solteiro"},
- {id: 2, name: "Casado"},
-  
+export const estadoCivilOptions = [
+ {value: 1, label: "Solteiro"},
+ {value: 2, label: "Casado"},  
 ];

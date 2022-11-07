@@ -54,7 +54,7 @@ const Login = () => {
                 console.log("values", values);
                 //logar(values);
 
-                if (values.usuario != 'admin' && values.senha != 'admin') {
+                if (values.usuario != 'admin' || values.senha != 'admin') {
                     Swal.fire({
                         title: 'Atenção',
                         text: 'Informe um usuário e senha válidos.',
