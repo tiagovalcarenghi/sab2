@@ -1,12 +1,14 @@
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FormInputText } from "./form-components/FormInputText";
 import { FormInputDropdown } from "./form-components/FormInputDropdown";
-import { Endereco, FormValuesPessoaPF, initialValues, initialValuesEndereco } from "../../utils/cadastro-pf/constants";
-import { Button, Grid, InputLabel, Paper, TextField } from "@mui/material";
+import { Endereco, FormValuesPessoaPF, initialValues } from "../../utils/cadastro-pf/constants";
+import { Button, Grid, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
+import CadastroAdress from "./CadastroAdress";
+import { useStaticState } from "@material-ui/pickers";
 import { useState } from "react";
-import { FormInputTextCEP } from "./form-components/FormInputTextCEP";
+import axios from "axios";
+
 
 const CadastroPF = (props: any) => {
 
@@ -23,15 +25,11 @@ const CadastroPF = (props: any) => {
 
 
   const methods = useForm<FormValuesPessoaPF>({ defaultValues: initialValues });
-  const { handleSubmit, reset, control } = methods;
+  const { handleSubmit, reset, control, setValue } = methods;
   const onSubmit = (data: FormValuesPessoaPF) => {
-    
-    
-    console.log(data.endereco.logradouro);
-    console.log(addressData?.logradouro);
-
-
+    console.log(data);
   };
+
 
 
   const BASE_URL = 'https://viacep.com.br/ws'
@@ -39,23 +37,31 @@ const CadastroPF = (props: any) => {
   const [addressData, setAddressData] = useState<Endereco>();
 
 
-  const handleSubmitPreview = () => {
 
-    handleSubmit((data2) => {
-      console.log(data2);
+  const handleClick = (data: any) => {
 
-      setAddressData(undefined);
+    setAddressData(undefined);
 
-      axios(`${BASE_URL}/${searchValue}/json`)
-        .then(response => {
-          setAddressData(response.data)
-          
-        })
-        .catch(() => console.error('Houve um errro ao buscar os dados!'));
+    axios(`${BASE_URL}/${searchValue}/json`)
+      .then(response => {
 
-    })()
+        setAddressData(response.data)
 
-  }
+        data.logradouro = addressData?.logradouro;
+        data.bairro = addressData?.bairro;
+        data.cep = addressData?.cep;
+
+        setValue("endereco.logradouro", data.logradouro);
+        setValue("endereco.bairro", data.bairro);
+
+        console.log(data);
+
+
+      })
+      .catch(() => console.error('Houve um errro ao buscar os dados!'));
+
+  };
+
 
 
   return (
@@ -109,48 +115,8 @@ const CadastroPF = (props: any) => {
 
         </Grid>
 
+        <CadastroAdress handleClick={handleClick} setSearchValue={setSearchValue} />
 
-        <Grid container spacing={2} justifyContent="flex-start">
-          <Grid item xs={3}>
-            <TextField
-              fullWidth
-              size="small"
-              type="number"
-              placeholder="somente números"
-              value={searchValue}
-              name="endereco.cep"
-              label="CEP"
-              onChange={event => setSearchValue(event.target.value)}
-            />
-          </Grid>
-          <Grid item xs={9}>
-            {<Button variant={"outlined"} type="submit" onClick={handleSubmitPreview}  >Buscar CEP</Button>}
-          </Grid>
-
-        </Grid>
-
-
-
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-
-          <Grid item xs={3}>
-            <FormInputTextCEP name="endereco.logradouro" control={control} label="Logradouro" setValue={addressData?.logradouro} />
-          </Grid>
-
-          <Grid item xs={3}>
-            <FormInputTextCEP name="endereco.numero" control={control} label="Número" setValue={addressData?.numero} />
-          </Grid>
-
-          <Grid item xs={3}>
-            <FormInputTextCEP name="endereco.bairro" control={control} label="Bairro" setValue={addressData?.bairro} />
-          </Grid>
-
-
-          <Grid item xs={3}>
-            <FormInputTextCEP name="endereco.localidade" control={control} label="Cidade" setValue={addressData?.localidade} />
-          </Grid>
-
-        </Grid>
 
         <Grid container spacing={2} justifyContent="flex-end">
           <Grid item>

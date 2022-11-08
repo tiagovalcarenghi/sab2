@@ -23,27 +23,27 @@ export interface FormValuesPessoaPF {
 
 
 
-export interface Endereco  {
-  tipoendereco: typeof TipoEnderecoOptions[] | undefined;
+export interface Endereco   {
+  //tipoendereco: typeof TipoEnderecoOptions[] | undefined;
   logradouro: string | undefined;
   cep: string | undefined;
   bairro: string | undefined;
-  numero: string | undefined;
-  complemento: string | undefined;
-  estado: string | undefined;
-  localidade: string | undefined;
+  //numero: string | undefined;
+  //complemento: string | undefined;
+  //uf: string | undefined;
+  //localidade: string | undefined;
 }
 
 
 export const initialValuesEndereco = {
-  tipoendereco: [],
-  logradouro: '',
-  cep: '',
-  bairro: '',
-  numero: '',
-  complemento: '',
-  estado: '',
-  localidade: '',
+  //tipoendereco: [],
+  logradouro: "",
+  cep: "",
+  bairro: "",
+  //numero: "",
+  //complemento: "",
+  //estado: "",
+  //localidade: "",
 }
 
 export const TipoEnderecoOptions = [
