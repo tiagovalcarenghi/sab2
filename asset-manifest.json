@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/sab2/static/css/main.53e2d7f7.css",
-    "main.js": "/sab2/static/js/main.d109b607.js",
+    "main.js": "/sab2/static/js/main.8de84fec.js",
     "static/js/787.ce2f7ff5.chunk.js": "/sab2/static/js/787.ce2f7ff5.chunk.js",
     "static/media/banner-SAB.png": "/sab2/static/media/banner-SAB.53e76f221c15d97cb051.png",
     "index.html": "/sab2/index.html",
     "main.53e2d7f7.css.map": "/sab2/static/css/main.53e2d7f7.css.map",
-    "main.d109b607.js.map": "/sab2/static/js/main.d109b607.js.map",
+    "main.8de84fec.js.map": "/sab2/static/js/main.8de84fec.js.map",
     "787.ce2f7ff5.chunk.js.map": "/sab2/static/js/787.ce2f7ff5.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.53e2d7f7.css",
-    "static/js/main.d109b607.js"
+    "static/js/main.8de84fec.js"
   ]
 }
