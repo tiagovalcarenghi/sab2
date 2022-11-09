@@ -1,10 +1,9 @@
 import { TextField } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { FormInputProps } from "./FormInputProps";
 
-export const FormInputText = ({ name, control, label }: FormInputProps) => {
-
-
+export const FormInputText = ({ name, control, label, readonly, type, shrink, setValue }: FormInputProps) => {
+ 
   return (
     <Controller
       name={name}
@@ -19,10 +18,17 @@ export const FormInputText = ({ name, control, label }: FormInputProps) => {
           size="small"
           error={!!error}
           onChange={onChange}
-          value={value}
+          value={value = setValue == !setValue ? value : setValue}
           fullWidth
           label={label}
           variant="outlined"
+          InputProps={{
+            readOnly: readonly
+          }}
+          InputLabelProps={{
+            shrink: shrink,
+          }}
+          type={type}          
         />
       )}
     />

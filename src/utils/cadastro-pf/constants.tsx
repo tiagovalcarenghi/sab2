@@ -1,4 +1,3 @@
-
 export const initialValues = {
   nomeCompleto: '',
   cdEstadoCivil: '',
@@ -6,9 +5,12 @@ export const initialValues = {
   nacionalidade: '',
   ci: '',
   cnh: '',
-  outro_doc: '',
+  docExtra: '',
   cpf: '',
-  endereco: {}
+  endereco: {},
+  telefone: '',
+  telefoneAdicional: '',
+  email: '',
 }
 
 
@@ -18,49 +20,37 @@ export interface FormValuesPessoaPF {
   profissao: string;
   nacionalidade: string;
   ci: string;
+  cnh: string,
+  docExtra: string,
+  cpf: string,
   endereco: Endereco; 
+  telefone: string;
+  telefoneAdicional: string;
+  email: string;
 }
 
 
 
 export interface Endereco   {
-  //tipoendereco: typeof TipoEnderecoOptions[] | undefined;
   logradouro: string | undefined;
-  cep: string | undefined;
+  cep: string;
   bairro: string | undefined;
-  //numero: string | undefined;
-  //complemento: string | undefined;
-  //uf: string | undefined;
-  //localidade: string | undefined;
+  numero: string;
+  complemento: string;
+  uf: string | undefined;
+  localidade: string | undefined;
 }
 
 
 export const initialValuesEndereco = {
-  //tipoendereco: [],
   logradouro: "",
   cep: "",
   bairro: "",
-  //numero: "",
-  //complemento: "",
-  //estado: "",
-  //localidade: "",
+  numero: "",
+  complemento: "",
+  estado: "",
+  localidade: "",
 }
-
-export const TipoEnderecoOptions = [
-  {value: 1, label: "Alameda"},
-  {value: 2, label: "Área"},  
-  {value: 3, label: "Avenida"},  
-  {value: 4, label: "Campo"},  
-  {value: 5, label: "Conjunto"},  
-  {value: 6, label: "Esplanada"},  
-  {value: 7, label: "Estrada"},  
-  {value: 8, label: "Ladeira"},  
-  {value: 9, label: "Rua"},  
-  {value: 10, label: "Rodovia"},  
- ];
-
-
-
 
 export const estadoCivilOptions = [
  {value: 1, label: "Solteiro(a)"},
