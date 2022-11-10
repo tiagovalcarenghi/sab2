@@ -7,6 +7,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
+import { FormInputTextMask } from "./form-components/FormInputMask";
 //import { FormInputTextCEP } from "./form-components/FormInputTextCEP";
 
 const CadastroPF = (props: any) => {
@@ -97,14 +98,14 @@ const CadastroPF = (props: any) => {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
           <Grid item xs={3}>
-            <FormInputText name="telefone" control={control} label="Telefone" />
+            <FormInputTextMask name="telefone" control={control} label="Telefone" />
           </Grid>
           <Grid item xs={3}>
-            <FormInputText name="telefoneAdicional" control={control} label="Telefone Adicionar" />
+            <FormInputTextMask name="telefoneAdicional" control={control} label="Telefone Adicional" />
           </Grid>
 
           <Grid item xs={6}>
-            <FormInputText name="email" control={control} label="Email" />
+            <FormInputText name="email" control={control} label="Email" type="email" />
           </Grid>
 
 
@@ -178,7 +179,7 @@ const CadastroPF = (props: any) => {
           </Grid>
 
           <Grid item xs={3}>
-            <FormInputText name="endereco.numero" control={control} label="Número" />
+            <FormInputText name="endereco.numero" control={control} label="Número"  type="number" />
           </Grid>
 
           <Grid item xs={3}>

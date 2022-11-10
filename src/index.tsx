@@ -3,8 +3,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './index.css';
 import Login from './pages/login/Login';
 import MainMenu from './pages/main-menu/MainMenu';
-
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'
+import store from './redux/store';
+
 
 
 const root = ReactDOM.createRoot(
@@ -19,12 +21,14 @@ if (ambiente !== "production") {
 
 
 root.render(
+  //<Provider store={store}>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/main-menu/*" element={<MainMenu />} />
       </Routes>
-    </BrowserRouter>  
+    </BrowserRouter>
+  //</Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

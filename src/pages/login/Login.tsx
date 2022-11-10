@@ -123,6 +123,9 @@ const Login = () => {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 helperText={touched.usuario && errors.usuario}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
                                             />
 
                                             <TextField
@@ -136,6 +139,9 @@ const Login = () => {
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 helperText={touched.senha && errors.senha}
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
                                             />
 
                                             <Button
