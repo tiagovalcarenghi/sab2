@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 import { FormInputProps } from "./FormInputProps";
 
-export const FormInputText = ({ name, control, label, readonly, type, shrink, setValue }: FormInputProps) => {
+export const FormInputText = ({ name, control, label, readonly, type, shrink }: FormInputProps) => {
  
   return (
     <Controller
@@ -18,9 +18,9 @@ export const FormInputText = ({ name, control, label, readonly, type, shrink, se
           size="small"
           error={!!error}
           onChange={onChange}
-          value={value = setValue == !setValue ? value : setValue}
+          value={value}
           fullWidth
-          label={label}
+          label={label}          
           variant="outlined"
           InputProps={{
             readOnly: readonly
@@ -28,7 +28,8 @@ export const FormInputText = ({ name, control, label, readonly, type, shrink, se
           InputLabelProps={{
             shrink: shrink,
           }}
-          type={type}          
+          type={type}      
+          required={false}
         />
       )}
     />

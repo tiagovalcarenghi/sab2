@@ -1,7 +1,7 @@
 import React from "react";
 import { Controller } from "react-hook-form";
 import { FormInputProps } from "./FormInputProps";
-import { estadoCivilOptions } from "../../../utils/cadastro-pf/constants";
+import { estadoCivilOptions } from "../../../../utils/cadastro-pf/constants";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 

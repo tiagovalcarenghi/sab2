@@ -7,8 +7,8 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import AppMenu from '../../../../components/main-menu/AppMenu';
-import CadastroPJ from '../../../../components/cadastro-pessoas/CadastroPJ';
-import CadastroPF from '../../../../components/cadastro-pessoas/CadastroPF';
+import CadastroPJ from '../../../../components/cadastro-pessoas/pessoa-juridica/CadastroPJ';
+import CadastroPF from '../../../../components/cadastro-pessoas/pessoa-fisica/CadastroPF';
 import { ThemeProvider } from '@emotion/react';
 
 

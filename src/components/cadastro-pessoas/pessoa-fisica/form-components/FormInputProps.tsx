@@ -8,4 +8,5 @@ export interface FormInputProps {
     shrink?: any,
     onChange?: any,
     searchValue?: any
+    values?:any;
   }

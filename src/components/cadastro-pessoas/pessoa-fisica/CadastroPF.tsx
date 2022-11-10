@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
 import { FormInputText } from "./form-components/FormInputText";
 import { FormInputDropdown } from "./form-components/FormInputDropdown";
-import { Endereco, FormValuesPessoaPF, initialValues } from "../../utils/cadastro-pf/constants";
+import { FormValuesPessoaPF, initialValues } from "../../../utils/cadastro-pf/constants";
 import { Button, Grid, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-import { FormInputTextMask } from "./form-components/FormInputMask";
-//import { FormInputTextCEP } from "./form-components/FormInputTextCEP";
+import { FormInputTextPhone } from "./form-components/FormInputTextPhone";
+import Swal from 'sweetalert2';
+import { FormInpuTextCEP } from "./form-components/FormInpuTextCEP";
 
 const CadastroPF = (props: any) => {
 
@@ -22,11 +23,20 @@ const CadastroPF = (props: any) => {
     },
 
   });
+  
 
 
   const methods = useForm<FormValuesPessoaPF>({ defaultValues: initialValues });
-  const { handleSubmit, reset, control, register, setValue } = methods;
+  const { handleSubmit, reset, control, setValue } = methods;
   const onSubmit = (data: FormValuesPessoaPF) => {
+
+    data.logradouro = addressData?.logradouro;
+    data.cep = searchValue;
+    data.bairro = addressData?.bairro;
+    data.localidade = addressData?.localidade;
+    data.uf = addressData?.uf;
+
+
     console.log(data);
   };
 
@@ -34,12 +44,13 @@ const CadastroPF = (props: any) => {
 
   const BASE_URL = 'https://viacep.com.br/ws'
   const [searchValue, setSearchValue] = useState('');
-  const [addressData, setAddressData] = useState<Endereco>();
+  const [addressData, setAddressData] = useState<FormValuesPessoaPF>();
 
 
   const handleChange = (event: any) => {
     setSearchValue(event.target.value);
   };
+
 
   return (
 
@@ -78,10 +89,10 @@ const CadastroPF = (props: any) => {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
           <Grid item xs={3}>
-            <FormInputText name="ci" control={control} label="Carteira de Idendidade" />
+            <FormInputText name="ci" type="number" control={control} label="Carteira de Idendidade" />
           </Grid>
           <Grid item xs={3}>
-            <FormInputText name="cnh" control={control} label="CNH" />
+            <FormInputText name="cnh" type="number" control={control} label="CNH" />
           </Grid>
 
           <Grid item xs={3}>
@@ -89,7 +100,7 @@ const CadastroPF = (props: any) => {
           </Grid>
 
           <Grid item xs={3}>
-            <FormInputText name="cpf" control={control} label="CPF" />
+            <FormInputText name="cpf" type="number" control={control} label="CPF" />
           </Grid>
 
         </Grid>
@@ -98,10 +109,10 @@ const CadastroPF = (props: any) => {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
           <Grid item xs={3}>
-            <FormInputTextMask name="telefone" control={control} label="Telefone" />
+            <FormInputTextPhone name="telefone" control={control} label="Telefone Principal" />
           </Grid>
           <Grid item xs={3}>
-            <FormInputTextMask name="telefoneAdicional" control={control} label="Telefone Adicional" />
+            <FormInputTextPhone name="telefoneAdicional" control={control} label="Telefone Adicional" />
           </Grid>
 
           <Grid item xs={6}>
@@ -143,27 +154,33 @@ const CadastroPF = (props: any) => {
               InputLabelProps={{
                 shrink: true,
               }}
-              name="endereco.cep"
+              name="cep"
               type="number"
             />
 
           </Grid>
 
           <Grid item xs={3}>
-            {<Button variant="contained" type="submit" onClick={(event) => {
+            {<Button variant="contained" onClick={(event: any) => {
 
               event.preventDefault();
 
               setAddressData(undefined);
               axios(`${BASE_URL}/${searchValue}/json`)
                 .then(response => {
-                  setAddressData(response.data)
-                  setValue("endereco.logradouro", addressData?.logradouro);
-                  setValue("endereco.bairro", addressData?.bairro);
-                  setValue("endereco.uf", addressData?.uf);
-                  setValue("endereco.localidade", addressData?.localidade);
+                  setAddressData(response.data)                
                 })
-                .catch(() => console.error('Houve um errro ao buscar os dados!'));
+                .catch(() => {
+
+                  Swal.fire({
+                    title: 'Atenção',
+                    text: 'CEP inválido ou incompleto.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                  })
+
+
+                });
 
             }}>Buscar CEP</Button>}
           </Grid>
@@ -175,19 +192,19 @@ const CadastroPF = (props: any) => {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
           <Grid item xs={3}>
-            <FormInputText name="endereco.logradouro" readonly={true} control={control} shrink={true} setValue={addressData?.logradouro} label="Endereço" />
+            <FormInpuTextCEP name="logradouro" readonly={true} control={control} shrink={true} setValue={addressData?.logradouro} label="Endereço" />
           </Grid>
 
           <Grid item xs={3}>
-            <FormInputText name="endereco.numero" control={control} label="Número"  type="number" />
+            <FormInputText name="numero" control={control} label="Número" />
           </Grid>
 
           <Grid item xs={3}>
-            <FormInputText name="endereco.complemento" control={control} label="Complemento" />
+            <FormInputText name="complemento" control={control} label="Complemento" />
           </Grid>
 
           <Grid item xs={3}>
-            <FormInputText name="endereco.bairro" readonly={true} control={control} label="Bairro" shrink={true} setValue={addressData?.bairro} />
+            <FormInpuTextCEP name="bairro" readonly={true} control={control} label="Bairro" shrink={true} setValue={addressData?.bairro} />
           </Grid>
 
 
@@ -197,11 +214,11 @@ const CadastroPF = (props: any) => {
 
 
           <Grid item xs={3}>
-            <FormInputText name="endereco.uf" readonly={true} control={control} label="UF" shrink={true} setValue={addressData?.uf} />
+            <FormInpuTextCEP name="uf" readonly={true} control={control} label="UF" shrink={true} setValue={addressData?.uf} />
           </Grid>
 
           <Grid item xs={3}>
-            <FormInputText name="endereco.localidade" readonly={true} control={control} label="Cidade" shrink={true}  setValue={addressData?.localidade}/>
+            <FormInpuTextCEP name="localidade" readonly={true} control={control} label="Cidade" shrink={true} setValue={addressData?.localidade} />
           </Grid>
 
         </Grid>
@@ -218,7 +235,19 @@ const CadastroPF = (props: any) => {
           {<Button variant="contained" type="submit" onClick={handleSubmit(onSubmit)}  >Salvar</Button>}
         </Grid>
         <Grid item>
-          <Button onClick={() => reset()} variant={"outlined"} >Limpar Dados</Button>
+          <Button
+
+            onClick={(event:any) => {
+              event.preventDefault();
+              
+              setAddressData(initialValues);
+              setSearchValue('');
+              reset();             
+              
+            }}
+
+            variant={"outlined"} >Limpar Dados</Button>
+
         </Grid>
       </Grid>
 

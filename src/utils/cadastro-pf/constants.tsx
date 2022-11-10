@@ -6,11 +6,18 @@ export const initialValues = {
   ci: '',
   cnh: '',
   docExtra: '',
-  cpf: '',
-  endereco: {},
+  cpf: '',  
   telefone: '',
   telefoneAdicional: '',
   email: '',
+  logradouro: '',
+  cep: '',
+  bairro: '',
+  numero: '',
+  complemento: '',
+  estado: '',
+  localidade: '',
+  uf:'',
 }
 
 
@@ -22,16 +29,10 @@ export interface FormValuesPessoaPF {
   ci: string;
   cnh: string,
   docExtra: string,
-  cpf: string,
-  endereco: Endereco; 
+  cpf: string,  
   telefone: string;
   telefoneAdicional: string;
   email: string;
-}
-
-
-
-export interface Endereco   {
   logradouro: string | undefined;
   cep: string;
   bairro: string | undefined;
@@ -41,16 +42,6 @@ export interface Endereco   {
   localidade: string | undefined;
 }
 
-
-export const initialValuesEndereco = {
-  logradouro: "",
-  cep: "",
-  bairro: "",
-  numero: "",
-  complemento: "",
-  estado: "",
-  localidade: "",
-}
 
 export const estadoCivilOptions = [
  {value: 1, label: "Solteiro(a)"},
