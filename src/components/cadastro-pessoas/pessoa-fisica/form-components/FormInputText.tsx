@@ -1,37 +1,21 @@
 import { TextField } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
 import { FormInputProps } from "./FormInputProps";
 
-export const FormInputText = ({ name, control, label, readonly, type, shrink }: FormInputProps) => {
- 
-  return (
-    <Controller
-      name={name}
-      control={control}
-      render={({
-        field: { onChange, value },
-        fieldState: { error },
+export const FormInputText = ({ name, error, helpertext, label, values, onChange, type }: FormInputProps) => {
 
-      }) => (
-        <TextField
-          helperText={error ? error.message : null}
-          size="small"
-          error={!!error}
-          onChange={onChange}
-          value={value}
-          fullWidth
-          label={label}          
-          variant="outlined"
-          InputProps={{
-            readOnly: readonly
-          }}
-          InputLabelProps={{
-            shrink: shrink,
-          }}
-          type={type}      
-          required={false}
-        />
-      )}
+  return (
+    < TextField
+      fullWidth
+      id={name}
+      name={name}
+      label={label}
+      value={values}
+      onChange={onChange}
+      error={error}
+      helperText={helpertext}
+      size="small"
+      type={type == !type ? "text" : type}
     />
   );
 };
+

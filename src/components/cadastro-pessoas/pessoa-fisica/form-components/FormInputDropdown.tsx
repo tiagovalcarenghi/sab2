@@ -1,38 +1,28 @@
-import React from "react";
-import { Controller } from "react-hook-form";
-import { FormInputProps } from "./FormInputProps";
-import { estadoCivilOptions } from "../../../../utils/cadastro-pf/constants";
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import Select from 'react-select';
 
 
+export interface FormSelectProps {
+  onChange?: any;
+  value?: any;
+  options?: any;
+}
 
-export const FormInputDropdown: React.FC<FormInputProps> = ({
-  name,
-  control,
-  label,
-}) => {
-  const generateSingleOptions = () => {
-    return estadoCivilOptions.map((option: any) => {
-      return (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
-        </MenuItem>
-      );
-    });
+
+export const MySelect = ({ onChange, options, value  }: FormSelectProps) => {
+
+  const defaultValue = (options: any, value: any) => {
+    return options.find((option: any) => option.value === value) || "";
   };
 
   return (
-    <FormControl size={"small"} fullWidth>
-      <InputLabel id="lbl-ec">{label}</InputLabel>
-      <Controller
-        render={({ field: { onChange, value } }) => (
-          <Select labelId="lbl-ec" label={label} onChange={onChange} value={value}>
-            {generateSingleOptions()}
-          </Select>
-        )}
-        control={control}
-        name={name}
-      />
-    </FormControl>
-  );
-};
+    <div >
+      <Select
+        value={defaultValue(options, value)}
+        onChange={value => { onChange(value) }}
+        options={options}
+        classNamePrefix="Selecione"
+         />
+    </div>
+
+  )
+}

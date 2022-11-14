@@ -6,7 +6,7 @@ export const initialValues = {
   ci: '',
   cnh: '',
   docExtra: '',
-  cpf: '',  
+  cpf: '',
   telefone: '',
   telefoneAdicional: '',
   email: '',
@@ -17,7 +17,7 @@ export const initialValues = {
   complemento: '',
   estado: '',
   localidade: '',
-  uf:'',
+  uf: '',
 }
 
 
@@ -29,7 +29,7 @@ export interface FormValuesPessoaPF {
   ci: string;
   cnh: string,
   docExtra: string,
-  cpf: string,  
+  cpf: string,
   telefone: string;
   telefoneAdicional: string;
   email: string;
@@ -44,11 +44,14 @@ export interface FormValuesPessoaPF {
 
 
 export const estadoCivilOptions = [
- {value: 1, label: "Solteiro(a)"},
- {value: 2, label: "Casado(a)"},  
- {value: 3, label: "Divorciado(a)"},  
- {value: 4, label: "Viúvo(a)"},  
- {value: 5, label: "Separado(a)"},  
+  { value: 1, label: "Solteiro(a)" },
+  { value: 2, label: "Casado(a)" },
+  { value: 3, label: "Divorciado(a)" },
+  { value: 4, label: "Viúvo(a)" },
+  { value: 5, label: "Separado(a)" },
 ];
+
+
+
 
 
