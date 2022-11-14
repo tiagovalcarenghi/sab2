@@ -36,18 +36,15 @@ const CadastroPF = (props: any) => {
 
 
   const BASE_URL = 'https://viacep.com.br/ws'
-  const [searchValue, setSearchValue] = useState('');
+
   const [addressData, setAddressData] = useState<FormValuesPessoaPF>();
 
-
-  const handleChange = (event: any) => {
-    setSearchValue(event.target.value);
-  };
-
-
   const CadPFSchema = yup.object().shape({
-    nomeCompleto: yup.string().required('Informe o nome Completo.'),
-    telefone: yup.string().required('Informe o Telefone'),
+    nomeCompleto: yup.string().required('Informe o nome completo.'),
+    telefone: yup.string().required('Informe o telefone'),
+    cdEstadoCivil: yup.string().required('Informe o estado civil.'),
+    cpf: yup.string().required('Informe o cpf.'),
+  
 
 
 
@@ -60,7 +57,7 @@ const CadastroPF = (props: any) => {
     validationSchema: CadPFSchema,
     onSubmit: (values) => {
 
-      values.cep = searchValue;
+      //values.cep = values.cep;
 
       const logradouro: string = addressData?.logradouro!
       const bairro: string = addressData?.bairro!
@@ -71,6 +68,12 @@ const CadastroPF = (props: any) => {
       values.bairro = bairro;
       values.localidade = localidade;
       values.uf = uf;
+
+
+
+      if (values.logradouro == '' || values.logradouro == undefined) {
+        console.log('erro');
+      }
 
       alert(JSON.stringify(values, null, 2));
     },
@@ -133,7 +136,6 @@ const CadastroPF = (props: any) => {
                 onChange={(value: any) => formik.setFieldValue('cdEstadoCivil', value.value)}
                 value={formik.values.cdEstadoCivil}
                 options={estadoCivilOptions}
-
               />
             </Grid>
           </Grid>
@@ -279,20 +281,23 @@ const CadastroPF = (props: any) => {
 
             <Grid item xs={3}>
 
-              <TextField
-                size="small"
-                onChange={handleChange}
-                value={searchValue}
-                placeholder="apenas números"
-                fullWidth
-                label="CEP"
-                variant="outlined"
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                name="cep"
-                type="number"
-              />
+              <FormInputMask
+                mask="99999999"
+                values={formik.values.cep}
+                disabled={false}
+                maskChar=" "
+                onChange={formik.handleChange}
+              >
+                {() => <TextField
+                  name="cep"
+                  label="CEP"
+                  helperText={formik.touched.cep && formik.errors.cep}
+                  error={formik.touched.cep && Boolean(formik.errors.cep)}
+                  fullWidth
+                  size="small"
+                />}
+              </FormInputMask>
+
 
             </Grid>
 
@@ -302,11 +307,12 @@ const CadastroPF = (props: any) => {
                 event.preventDefault();
 
                 setAddressData(undefined);
-                axios(`${BASE_URL}/${searchValue}/json`)
+                setAddressData(initialValues);
+                axios(`${BASE_URL}/${formik.values.cep}/json`)
                   .then(response => {
                     setAddressData(response.data)
 
-                    setValue('logradouro', addressData?.logradouro)
+
                   })
                   .catch(() => {
 
@@ -403,7 +409,6 @@ const CadastroPF = (props: any) => {
                 event.preventDefault();
 
                 setAddressData(initialValues);
-                setSearchValue('');
                 formik.resetForm();
               }}
 
