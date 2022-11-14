@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 import { FormInputProps } from "./FormInputProps";
 
-export const FormInputText = ({ name, error, helpertext, label, values, onChange, type }: FormInputProps) => {
+export const FormInputText = ({ name, error, helpertext, label, values, onChange, type, shrink }: FormInputProps) => {
 
   return (
     < TextField
@@ -15,6 +15,9 @@ export const FormInputText = ({ name, error, helpertext, label, values, onChange
       helperText={helpertext}
       size="small"
       type={type == !type ? "text" : type}
+      InputLabelProps={{
+        shrink: shrink,
+      }}
     />
   );
 };

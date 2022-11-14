@@ -6,7 +6,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-import { FormInputTextPhone } from "./form-components/FormInputTextPhone";
+import { FormInputMask } from "./form-components/FormInputMask";
 import Swal from 'sweetalert2';
 import { FormInpuTextCEP } from "./form-components/FormInpuTextCEP";
 import * as yup from 'yup';
@@ -31,19 +31,8 @@ const CadastroPF = (props: any) => {
 
 
   const methods = useForm<FormValuesPessoaPF>({ defaultValues: initialValues });
-  const { handleSubmit, reset, control, setValue } = methods;
-  const onSubmit = (data: FormValuesPessoaPF) => {
-
-    data.logradouro = addressData?.logradouro;
-    data.cep = searchValue;
-    data.bairro = addressData?.bairro;
-    data.localidade = addressData?.localidade;
-    data.uf = addressData?.uf;
-
-
-    console.log(data);
-  };
-
+  const { reset, control, setValue } = methods;
+  
 
 
   const BASE_URL = 'https://viacep.com.br/ws'
@@ -57,7 +46,7 @@ const CadastroPF = (props: any) => {
 
 
   const CadPFSchema = yup.object().shape({
-    nomeCompleto: yup.string().required('Informe o nome Completo.'),    
+    nomeCompleto: yup.string().required('Informe o nome Completo.'),
     telefone: yup.string().required('Informe o Telefone'),
 
 
@@ -70,6 +59,19 @@ const CadastroPF = (props: any) => {
     initialValues: initialValues,
     validationSchema: CadPFSchema,
     onSubmit: (values) => {
+
+      values.cep = searchValue;
+
+      const logradouro:string = addressData?.logradouro!
+      const bairro:string = addressData?.bairro!
+      const localidade:string = addressData?.localidade!
+      const uf:string = addressData?.uf!
+
+      values.logradouro = logradouro;
+      values.bairro = bairro;
+      values.localidade = localidade;
+      values.uf = uf;
+
       alert(JSON.stringify(values, null, 2));
     },
   });
@@ -144,19 +146,26 @@ const CadastroPF = (props: any) => {
                 onChange={formik.handleChange}
                 helpertext={formik.touched.ci && formik.errors.ci}
                 error={formik.touched.ci && Boolean(formik.errors.ci)}
-                type="number"                
+                type="number"
               />
             </Grid>
             <Grid item xs={3}>
-              <FormInputText
-                name="cnh"
-                label="CNH"
+            <FormInputMask
+                mask="99999999999"
                 values={formik.values.cnh}
+                disabled={false}
+                maskChar=" "
                 onChange={formik.handleChange}
-                helpertext={formik.touched.cnh && formik.errors.cnh}
-                error={formik.touched.cnh && Boolean(formik.errors.cnh)}
-                type="number"
-              />
+              >
+                {() => <TextField
+                  name="cnh"
+                  label="CNH"
+                  helperText={formik.touched.cnh && formik.errors.cnh}
+                  error={formik.touched.cnh && Boolean(formik.errors.cnh)}
+                  fullWidth
+                  size="small"
+                />}
+              </FormInputMask>
 
             </Grid>
 
@@ -172,15 +181,22 @@ const CadastroPF = (props: any) => {
             </Grid>
 
             <Grid item xs={3}>
-              <FormInputText 
-               name="cpf"
-               label="CPF"
-               values={formik.values.cpf}
-               onChange={formik.handleChange}
-               helpertext={formik.touched.cpf && formik.errors.cpf}
-               error={formik.touched.cpf && Boolean(formik.errors.cpf)}
-               type="number"
-              />
+            <FormInputMask
+                mask="999.999.999-99"
+                values={formik.values.cpf}
+                disabled={false}
+                maskChar=" "
+                onChange={formik.handleChange}
+              >
+                {() => <TextField
+                  name="cpf"
+                  label="CPF"
+                  helperText={formik.touched.cpf && formik.errors.cpf}
+                  error={formik.touched.cpf && Boolean(formik.errors.cpf)}
+                  fullWidth
+                  size="small"
+                />}
+              </FormInputMask>
             </Grid>
 
           </Grid>
@@ -189,7 +205,7 @@ const CadastroPF = (props: any) => {
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
             <Grid item xs={3}>
-              <FormInputTextPhone
+              <FormInputMask
                 mask="(99) 999999999"
                 values={formik.values.telefone}
                 disabled={false}
@@ -204,10 +220,10 @@ const CadastroPF = (props: any) => {
                   fullWidth
                   size="small"
                 />}
-              </FormInputTextPhone>
+              </FormInputMask>
             </Grid>
             <Grid item xs={3}>
-              <FormInputTextPhone
+              <FormInputMask
                 mask="(99) 999999999"
                 values={formik.values.telefoneAdicional}
                 disabled={false}
@@ -222,7 +238,7 @@ const CadastroPF = (props: any) => {
                   fullWidth
                   size="small"
                 />}
-              </FormInputTextPhone>
+              </FormInputMask>
             </Grid>
 
             <Grid item xs={6}>
@@ -316,11 +332,29 @@ const CadastroPF = (props: any) => {
             </Grid>
 
             <Grid item xs={3}>
-              <FormInputText name="numero" control={control} label="Número" />
+              <FormInputText
+                name="numero"
+                label="Número"
+                values={formik.values.numero}
+                onChange={formik.handleChange}
+                helpertext={formik.touched.numero && formik.errors.numero}
+                error={formik.touched.numero && Boolean(formik.errors.numero)}
+                type="number"
+                shrink={true}
+
+              />
             </Grid>
 
             <Grid item xs={3}>
-              <FormInputText name="complemento" control={control} label="Complemento" />
+              <FormInputText
+                name="complemento"
+                label="Complemento"
+                values={formik.values.complemento}
+                onChange={formik.handleChange}
+                helpertext={formik.touched.complemento && formik.errors.complemento}
+                error={formik.touched.complemento && Boolean(formik.errors.complemento)}
+                shrink={true}
+              />
             </Grid>
 
             <Grid item xs={3}>
@@ -368,8 +402,7 @@ const CadastroPF = (props: any) => {
 
                 setAddressData(initialValues);
                 setSearchValue('');
-                reset();
-
+                formik.resetForm();
               }}
 
               variant={"outlined"} >Limpar Dados</Button>

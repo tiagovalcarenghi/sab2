@@ -15,7 +15,6 @@ export const initialValues = {
   bairro: '',
   numero: '',
   complemento: '',
-  estado: '',
   localidade: '',
   uf: '',
 }

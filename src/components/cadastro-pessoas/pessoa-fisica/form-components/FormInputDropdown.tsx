@@ -17,10 +17,11 @@ export const MySelect = ({ onChange, options, value  }: FormSelectProps) => {
   return (
     <div >
       <Select
+        placeholder="Selecione:"
         value={defaultValue(options, value)}
         onChange={value => { onChange(value) }}
         options={options}
-        classNamePrefix="Selecione"
+        
          />
     </div>
 

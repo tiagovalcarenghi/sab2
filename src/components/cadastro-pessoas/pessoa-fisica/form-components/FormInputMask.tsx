@@ -11,7 +11,7 @@ export interface FormPhoneProps {
     onChange?: any;
 }
 
-export const FormInputTextPhone = ({ mask, values, disabled, maskChar, children, onChange }: FormPhoneProps) => {
+export const FormInputMask = ({ mask, values, disabled, maskChar, children, onChange }: FormPhoneProps) => {
 
 
     return (
