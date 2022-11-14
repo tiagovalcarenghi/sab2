@@ -32,7 +32,7 @@ const CadastroPF = (props: any) => {
 
   const methods = useForm<FormValuesPessoaPF>({ defaultValues: initialValues });
   const { reset, control, setValue } = methods;
-  
+
 
 
   const BASE_URL = 'https://viacep.com.br/ws'
@@ -62,10 +62,10 @@ const CadastroPF = (props: any) => {
 
       values.cep = searchValue;
 
-      const logradouro:string = addressData?.logradouro!
-      const bairro:string = addressData?.bairro!
-      const localidade:string = addressData?.localidade!
-      const uf:string = addressData?.uf!
+      const logradouro: string = addressData?.logradouro!
+      const bairro: string = addressData?.bairro!
+      const localidade: string = addressData?.localidade!
+      const uf: string = addressData?.uf!
 
       values.logradouro = logradouro;
       values.bairro = bairro;
@@ -100,21 +100,14 @@ const CadastroPF = (props: any) => {
 
               <FormInputText
                 name="nomeCompleto"
-                label="nomeCompleto"
+                label="Nome Completo"
                 values={formik.values.nomeCompleto}
                 onChange={formik.handleChange}
                 helpertext={formik.touched.nomeCompleto && formik.errors.nomeCompleto}
                 error={formik.touched.nomeCompleto && Boolean(formik.errors.nomeCompleto)} />
 
             </Grid>
-            <Grid item xs={2}>
-              <MySelect
-                onChange={(value: any) => formik.setFieldValue('cdEstadoCivil', value.value)}
-                value={formik.values.cdEstadoCivil}
-                options={estadoCivilOptions}
 
-              />
-            </Grid>
             <Grid item xs={3}>
               <FormInputText
                 name="profissao"
@@ -128,11 +121,20 @@ const CadastroPF = (props: any) => {
             <Grid item xs={3}>
               <FormInputText
                 name="nacionalidade"
-                label="nacionalidade"
+                label="Nacionalidade"
                 values={formik.values.nacionalidade}
                 onChange={formik.handleChange}
                 helpertext={formik.touched.nacionalidade && formik.errors.nacionalidade}
                 error={formik.touched.nacionalidade && Boolean(formik.errors.nacionalidade)} />
+            </Grid>
+
+            <Grid item xs={2}>
+              <MySelect
+                onChange={(value: any) => formik.setFieldValue('cdEstadoCivil', value.value)}
+                value={formik.values.cdEstadoCivil}
+                options={estadoCivilOptions}
+
+              />
             </Grid>
           </Grid>
 
@@ -150,7 +152,7 @@ const CadastroPF = (props: any) => {
               />
             </Grid>
             <Grid item xs={3}>
-            <FormInputMask
+              <FormInputMask
                 mask="99999999999"
                 values={formik.values.cnh}
                 disabled={false}
@@ -181,7 +183,7 @@ const CadastroPF = (props: any) => {
             </Grid>
 
             <Grid item xs={3}>
-            <FormInputMask
+              <FormInputMask
                 mask="999.999.999-99"
                 values={formik.values.cpf}
                 disabled={false}
@@ -214,7 +216,7 @@ const CadastroPF = (props: any) => {
               >
                 {() => <TextField
                   name="telefone"
-                  label="Telefone"
+                  label="Telefone Principal"
                   helperText={formik.touched.telefone && formik.errors.telefone}
                   error={formik.touched.telefone && Boolean(formik.errors.telefone)}
                   fullWidth

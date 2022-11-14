@@ -11,13 +11,13 @@ export interface FormSelectProps {
 const style = {
   control: (base:any, state:any) => ({
     ...base,
-    '&:hover': { borderColor: 'orange' , border: '2px solid orange' }, // border style on hover
+    '&:hover': { borderColor: 'orange' , border: '2px solid orange',  backgroundColor: 'white', }, // border style on hover
     border: '1px solid lightgray', // default border color
-    boxShadow: 'none', // no box-shadow
-    backgroundColor: 'white',
-    height: '41px'
-    
+    boxShadow: '10px', // no box-shadow
+   
+    height: '41px',
 }),
+
 };
 
 
@@ -30,11 +30,12 @@ export const MySelect = ({ onChange, options, value }: FormSelectProps) => {
   return (
     <div >
       <Select
-        placeholder="Selecione:"
+        placeholder="Estado Civil:"
         value={defaultValue(options, value)}
         onChange={value => { onChange(value) }}
         options={options}
         styles={style}
+        className="basic-single"
 
       />
     </div>
