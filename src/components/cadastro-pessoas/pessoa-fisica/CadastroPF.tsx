@@ -1,19 +1,17 @@
 import { useForm } from "react-hook-form";
-import { FormInputText } from "../form-components/FormInputText";
+import { FormInpuTextCEP, FormInputMask, FormInputText } from "../form-components/FormInput";
 import { estadoCivilOptions, FormValuesPessoaPF, initialValuesPF } from "../../../utils/cadastro-pf/constants";
 import { Button, Grid, IconButton, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-import { FormInputMask } from "../form-components/FormInputMask";
 import Swal from 'sweetalert2';
-import { FormInpuTextCEP } from "../form-components/FormInpuTextCEP";
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { MySelect } from "../form-components/FormInputDropdown";
-
+import { SelectChangeEvent } from '@mui/material/Select';
 
 const CadastroPF = (props: any) => {
 
@@ -42,13 +40,25 @@ const CadastroPF = (props: any) => {
   const CadPFSchema = yup.object().shape({
     nomeCompleto: yup.string().required('Informe o nome completo.'),
     telefone: yup.string().required('Informe o telefone'),
-    cdEstadoCivil: yup.string().required('Informe o estado civil.'),
+    //cdEstadoCivil: yup.string().required('Informe o estado civil.'),
     cpf: yup.string().required('Informe o cpf.'),
-  
+
 
 
 
   });
+
+
+  
+  const [cdestadocivil, setEstadoCivil] = useState('');
+
+  const handleChange2 = (event: SelectChangeEvent<typeof cdestadocivil>) => {
+      const {
+        target: { value },
+      } = event;
+      setEstadoCivil(value);
+    };
+
 
 
 
@@ -68,7 +78,7 @@ const CadastroPF = (props: any) => {
       values.bairro = bairro;
       values.localidade = localidade;
       values.uf = uf;
-
+      values.cdEstadoCivil = cdestadocivil;
 
 
       if (values.logradouro == '' || values.logradouro == undefined) {
@@ -133,9 +143,11 @@ const CadastroPF = (props: any) => {
 
             <Grid item xs={2}>
               <MySelect
-                onChange={(value: any) => formik.setFieldValue('cdEstadoCivil', value.value)}
-                value={formik.values.cdEstadoCivil}
+                label="Estado Civil"
                 options={estadoCivilOptions}
+                cdestadocivil={cdestadocivil}
+                handleChange={handleChange2}
+
               />
             </Grid>
           </Grid>
@@ -409,6 +421,7 @@ const CadastroPF = (props: any) => {
                 event.preventDefault();
 
                 setAddressData(initialValuesPF);
+                setEstadoCivil('');
                 formik.resetForm();
               }}
 

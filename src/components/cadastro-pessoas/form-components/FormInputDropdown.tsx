@@ -1,44 +1,73 @@
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { FormSelectProps } from './FormSelectProps';
 
-import Select from 'react-select';
 
 
-export interface FormSelectProps {
-  onChange?: any;
-  value?: any;
-  options?: any;
+
+export const MySelect = ({ options, handleChange, label, cdestadocivil }: FormSelectProps) => {
+
+    return (
+        <div>
+            <FormControl sx={{ width: 190 }} size="small">
+                <InputLabel id="demo-controlled-open-select-label">{label}</InputLabel>
+                <Select
+                    value={cdestadocivil}
+                    onChange={handleChange}
+                    size="small"
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    label={label}
+
+                >
+                    {options.map((name: any) => (
+                        <MenuItem
+                            key={name.value}
+                            value={name.value}
+
+                        >
+                            {name.label}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </div>
+    );
 }
 
-const style = {
-  control: (base:any, state:any) => ({
-    ...base,
-    '&:hover': { borderColor: 'orange' , border: '2px solid orange',  backgroundColor: 'white', }, // border style on hover
-    border: '1px solid lightgray', // default border color
-    boxShadow: '10px', // no box-shadow
-   
-    height: '41px',
-}),
-
-};
 
 
-export const MySelect = ({ onChange, options, value }: FormSelectProps) => {
 
-  const defaultValue = (options: any, value: any) => {
-    return options.find((option: any) => option.value === value) || "";
-  };
 
-  return (
-    <div >
-      <Select
-        placeholder="Estado Civil:"
-        value={defaultValue(options, value)}
-        onChange={value => { onChange(value) }}
-        options={options}
-        styles={style}
-        className="basic-single"
+export const MySelectMultiple = ({ options, handleChange, label, representanteslegais }: FormSelectProps) => {
 
-      />
-    </div>
+    return (
+        <div>
+            <FormControl sx={{ width: 500 }} size="small">
+                <InputLabel id="demo-controlled-open-select-label">{label}</InputLabel>
+                <Select
+                    multiple
+                    value={representanteslegais}
+                    onChange={handleChange}
+                    size="small"
+                    labelId="demo-select-small"
+                    id="demo-select-small"
+                    label={label}
 
-  )
+                >
+                    {options.map((name: any) => (
+                        <MenuItem
+                            key={name.value}
+                            value={name.value}
+
+                        >
+                            {name.label}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
+        </div>
+    );
 }

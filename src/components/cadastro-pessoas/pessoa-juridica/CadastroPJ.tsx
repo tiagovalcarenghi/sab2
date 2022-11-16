@@ -1,21 +1,19 @@
 import { useForm } from "react-hook-form";
-import { FormInputText } from "../form-components/FormInputText";
+import { FormInpuTextCEP, FormInputMask, FormInputText } from "../form-components/FormInput";
 
 import { Button, Grid, IconButton, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-import { FormInputMask } from "../form-components/FormInputMask";
 import Swal from 'sweetalert2';
-import { FormInpuTextCEP } from "../form-components/FormInpuTextCEP";
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { FormValuesPessoaPJ, initialValuesPJ, representantesLegaisOptions } from "../../../utils/cadastro-pj/constants";
 
 import { SelectChangeEvent } from '@mui/material/Select';
-import { MySelectMultiple } from "../form-components/FormDropDownMultiple";
+import { MySelect, MySelectMultiple } from "../form-components/FormInputDropdown";
 
 
 
@@ -52,13 +50,13 @@ const CadastroPJ = (props: any) => {
 
 
 
-    const [personName, setPersonName] = useState<string[]>([]);
+    const [representanteslegais, setRepresentantesLEgais] = useState<any[]>([]);
 
-    const handleChange = (event: SelectChangeEvent<typeof personName>) => {
+    const handleChange = (event: SelectChangeEvent<typeof representanteslegais>) => {
         const {
           target: { value },
         } = event;
-        setPersonName(
+        setRepresentantesLEgais(
           // On autofill we get a stringified value.
           typeof value === 'string' ? value.split(',') : value,
         );
@@ -82,7 +80,7 @@ const CadastroPJ = (props: any) => {
             values.bairro = bairro;
             values.localidade = localidade;
             values.uf = uf;
-            values.representantesLegais = personName;
+            values.representantesLegais = representanteslegais;
 
 
 
@@ -151,8 +149,8 @@ const CadastroPJ = (props: any) => {
                             <MySelectMultiple
                             label="Representantes Legais"
                             options={representantesLegaisOptions}
-                            personName={personName}
-                            handleChange={handleChange}                            
+                            representanteslegais={representanteslegais}
+                            handleChange={handleChange}
 
                             />
                         </Grid>
@@ -309,7 +307,7 @@ const CadastroPJ = (props: any) => {
                                 event.preventDefault();
 
                                 setAddressData(initialValuesPJ);
-                                setPersonName([]);
+                                setRepresentantesLEgais([]);
                                 formik.resetForm();
                             }}
 
