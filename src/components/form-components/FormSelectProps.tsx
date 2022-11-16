@@ -1,7 +1,8 @@
 export interface FormSelectProps {
   options?: any;
-  representanteslegais?: string[];
+  valueMulti?: string[];
   handleChange?: any;
   label?: string;
-  cdestadocivil?: any;
+  value?: any;
+  width?: any;
 }

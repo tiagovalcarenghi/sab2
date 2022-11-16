@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { FormInpuTextCEP, FormInputMask, FormInputText } from "../form-components/FormInput";
+import { FormInpuTextCEP, FormInputMask, FormInputText } from "../../form-components/FormInput";
 
 import { Button, Grid, IconButton, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -10,10 +10,14 @@ import Swal from 'sweetalert2';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { FormValuesPessoaPJ, initialValuesPJ, representantesLegaisOptions } from "../../../utils/cadastro-pj/constants";
+import { FormValuesPessoaPJ, initialValuesPJ, representantesLegaisOptions } from "../../../utils/cadastro-pessoas/constantspj";
 
 import { SelectChangeEvent } from '@mui/material/Select';
-import { MySelect, MySelectMultiple } from "../form-components/FormInputDropdown";
+import { MySelectMultiple } from "../../form-components/FormInputDropdown";
+
+import SearchIcon from '@mui/icons-material/Search';
+import SaveIcon from '@mui/icons-material/Save';
+import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 
 
 
@@ -44,7 +48,7 @@ const CadastroPJ = (props: any) => {
     const CadPJSchema = yup.object().shape({
         nomeEmpresarial: yup.string().required('Informe o nome completo.'),
         cnpj: yup.string().required('Informe o cnpj.'),
-     
+
 
     });
 
@@ -54,13 +58,13 @@ const CadastroPJ = (props: any) => {
 
     const handleChange = (event: SelectChangeEvent<typeof representanteslegais>) => {
         const {
-          target: { value },
+            target: { value },
         } = event;
         setRepresentantesLEgais(
-          // On autofill we get a stringified value.
-          typeof value === 'string' ? value.split(',') : value,
+            // On autofill we get a stringified value.
+            typeof value === 'string' ? value.split(',') : value,
         );
-      };
+    };
 
 
 
@@ -74,7 +78,7 @@ const CadastroPJ = (props: any) => {
             const bairro: string = addressData?.bairro!
             const localidade: string = addressData?.localidade!
             const uf: string = addressData?.uf!
-            
+
 
             values.logradouro = logradouro;
             values.bairro = bairro;
@@ -99,6 +103,86 @@ const CadastroPJ = (props: any) => {
         <form onSubmit={formik.handleSubmit}>
 
             <ThemeProvider theme={theme}>
+
+
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+                    <Grid item xs={4}>
+
+                        <FormInputText
+                            name="nomeEmpresarialFiltro"
+                            label="Nome Empresarial"
+                            values={formik.values.nomeEmpresarialFiltro}
+                            onChange={formik.handleChange}
+                            helpertext={formik.touched.nomeEmpresarialFiltro && formik.errors.nomeEmpresarialFiltro}
+                            error={formik.touched.nomeEmpresarialFiltro && Boolean(formik.errors.nomeEmpresarialFiltro)} />
+
+                    </Grid>
+
+
+
+
+                    <Grid item xs={3}>
+                    <FormInputMask
+                                mask="99.999.999/0001-99"
+                                values={formik.values.cnpjFiltro}
+                                disabled={false}
+                                maskChar=" "
+                                onChange={formik.handleChange}
+                            >
+                                {() => <TextField
+                                    name="cnpjFiltro"
+                                    label="CNPJ"
+                                    helperText={formik.touched.cnpjFiltro && formik.errors.cnpjFiltro}
+                                    error={formik.touched.cnpjFiltro && Boolean(formik.errors.cnpjFiltro)}
+                                    fullWidth
+                                    size="small"
+                                />}
+                            </FormInputMask>
+                    </Grid>
+
+
+                    <Grid item xs={3}>
+
+                        {<Button color="primary" variant="contained"
+
+
+                            // onClick={(event: any) => {
+
+                            //   event.preventDefault();
+
+                            //   setAddressData(undefined);
+                            //   setAddressData(initialValuesPF);
+                            //   axios(`${BASE_URL}/${formik.values.cep}/json`)
+                            //     .then(response => {
+                            //       setAddressData(response.data)
+
+
+                            //     })
+                            //     .catch(() => {
+
+                            //       Swal.fire({
+                            //         title: 'Atenção',
+                            //         text: 'CEP inválido ou incompleto.',
+                            //         icon: 'error',
+                            //         confirmButtonText: 'OK'
+                            //       })
+
+
+                            //     });
+
+                            // }}
+
+
+                            startIcon={<SearchIcon />}>
+                            Filtrar
+                        </Button>}
+
+                    </Grid>
+
+                </Grid>
+
+
 
                 <h3>Informações Pessoais:</h3>
 
@@ -147,10 +231,11 @@ const CadastroPJ = (props: any) => {
 
                         <Grid item xs={4}>
                             <MySelectMultiple
-                            label="Representantes Legais"
-                            options={representantesLegaisOptions}
-                            representanteslegais={representanteslegais}
-                            handleChange={handleChange}
+                                label="Representantes Legais"
+                                options={representantesLegaisOptions}
+                                valueMulti={representanteslegais}
+                                handleChange={handleChange}
+                                width={500}
 
                             />
                         </Grid>
@@ -224,7 +309,7 @@ const CadastroPJ = (props: any) => {
 
                                     });
 
-                            }}>Buscar CEP</Button>}
+                            }}  startIcon={<SearchIcon />}>Buscar CEP</Button>}
                         </Grid>
 
 
@@ -290,7 +375,7 @@ const CadastroPJ = (props: any) => {
 
 
 
-                <Grid container spacing={2} justifyContent="flex-end" marginTop={5}>
+                <Grid container spacing={2} justifyContent="flex-end" marginTop={1}>
                     <Grid item>
                         <IconButton color="primary" aria-label="upload picture" component="label">
                             <input hidden accept="image/*" type="file" />
@@ -298,7 +383,7 @@ const CadastroPJ = (props: any) => {
                         </IconButton>
                     </Grid>
                     <Grid item>
-                        {<Button variant="contained" type="submit"   >Salvar</Button>}
+                        {<Button variant="contained" type="submit"    startIcon={<SaveIcon />}>Salvar</Button>}
                     </Grid>
                     <Grid item>
                         <Button
@@ -311,7 +396,7 @@ const CadastroPJ = (props: any) => {
                                 formik.resetForm();
                             }}
 
-                            variant={"outlined"} >Limpar Dados</Button>
+                            variant={"outlined"} startIcon={<ReplayCircleFilledIcon />}>Limpar Dados</Button>
 
                     </Grid>
                 </Grid>

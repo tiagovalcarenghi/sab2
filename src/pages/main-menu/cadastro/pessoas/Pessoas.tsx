@@ -88,15 +88,6 @@ function Pessoas() {
     };
 
 
-    const salvarPJ = () => {
-    }
-
-    const limparPJ = () => {
-    }
-
-
-
-
 
     return (
         
@@ -125,7 +116,7 @@ function Pessoas() {
                         <CadastroPF   />
                     </TabPanel>
                     <TabPanel value={value} index={1} dir={theme.direction}>
-                        <CadastroPJ  salvar={salvarPJ} limpar={limparPJ} />
+                        <CadastroPJ  />
                     </TabPanel>
 
                 </SwipeableViews>

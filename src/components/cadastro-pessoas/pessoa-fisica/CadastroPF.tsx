@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
-import { FormInpuTextCEP, FormInputMask, FormInputText } from "../form-components/FormInput";
-import { estadoCivilOptions, FormValuesPessoaPF, initialValuesPF } from "../../../utils/cadastro-pf/constants";
-import { Button, Grid, IconButton, Paper, } from "@mui/material";
+import { FormInpuTextCEP, FormInputMask, FormInputText } from "../../form-components/FormInput";
+import { estadoCivilOptions, FormValuesPessoaPF, initialValuesPF } from "../../../utils/cadastro-pessoas/constantspf";
+import { Button, Divider, Grid, IconButton, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import axios from "axios";
@@ -10,8 +10,11 @@ import Swal from 'sweetalert2';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { MySelect } from "../form-components/FormInputDropdown";
+import { MySelect } from "../../form-components/FormInputDropdown";
 import { SelectChangeEvent } from '@mui/material/Select';
+import SearchIcon from '@mui/icons-material/Search';
+import SaveIcon from '@mui/icons-material/Save';
+import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 
 const CadastroPF = (props: any) => {
 
@@ -49,15 +52,15 @@ const CadastroPF = (props: any) => {
   });
 
 
-  
+
   const [cdestadocivil, setEstadoCivil] = useState('');
 
   const handleChange2 = (event: SelectChangeEvent<typeof cdestadocivil>) => {
-      const {
-        target: { value },
-      } = event;
-      setEstadoCivil(value);
-    };
+    const {
+      target: { value },
+    } = event;
+    setEstadoCivil(value);
+  };
 
 
 
@@ -96,6 +99,86 @@ const CadastroPF = (props: any) => {
     <form onSubmit={formik.handleSubmit}>
 
       <ThemeProvider theme={theme}>
+
+
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+          <Grid item xs={4}>
+
+            <FormInputText
+              name="nomeCompletoFiltro"
+              label="Nome Completo"
+              values={formik.values.nomeCompletoFiltro}
+              onChange={formik.handleChange}
+              helpertext={formik.touched.nomeCompletoFiltro && formik.errors.nomeCompletoFiltro}
+              error={formik.touched.nomeCompletoFiltro && Boolean(formik.errors.nomeCompletoFiltro)} />
+
+          </Grid>
+
+
+
+
+          <Grid item xs={3}>
+            <FormInputMask
+              mask="999.999.999-99"
+              values={formik.values.cpfFiltro}
+              disabled={false}
+              maskChar=" "
+              onChange={formik.handleChange}
+            >
+              {() => <TextField
+                name="cpfFiltro"
+                label="CPF"
+                helperText={formik.touched.cpfFiltro && formik.errors.cpfFiltro}
+                error={formik.touched.cpfFiltro && Boolean(formik.errors.cpfFiltro)}
+                fullWidth
+                size="small"
+              />}
+            </FormInputMask>
+          </Grid>
+
+
+          <Grid item xs={3}>
+
+            {<Button color="primary"  variant="contained"
+
+
+            // onClick={(event: any) => {
+
+            //   event.preventDefault();
+
+            //   setAddressData(undefined);
+            //   setAddressData(initialValuesPF);
+            //   axios(`${BASE_URL}/${formik.values.cep}/json`)
+            //     .then(response => {
+            //       setAddressData(response.data)
+
+
+            //     })
+            //     .catch(() => {
+
+            //       Swal.fire({
+            //         title: 'Atenção',
+            //         text: 'CEP inválido ou incompleto.',
+            //         icon: 'error',
+            //         confirmButtonText: 'OK'
+            //       })
+
+
+            //     });
+
+            // }}
+
+
+            startIcon={<SearchIcon />}>
+              Filtrar
+            </Button>}
+
+          </Grid>
+
+        </Grid>
+
+
 
         <h3>Informações Pessoais:</h3>
 
@@ -145,8 +228,9 @@ const CadastroPF = (props: any) => {
               <MySelect
                 label="Estado Civil"
                 options={estadoCivilOptions}
-                cdestadocivil={cdestadocivil}
+                value={cdestadocivil}
                 handleChange={handleChange2}
+                width={218}
 
               />
             </Grid>
@@ -338,7 +422,11 @@ const CadastroPF = (props: any) => {
 
                   });
 
-              }}>Buscar CEP</Button>}
+              }}
+
+              startIcon={<SearchIcon />}>
+                
+                Buscar CEP</Button>}
             </Grid>
 
 
@@ -404,7 +492,7 @@ const CadastroPF = (props: any) => {
 
 
 
-        <Grid container spacing={2} justifyContent="flex-end" marginTop={5}>
+        <Grid container spacing={2} justifyContent="flex-end" marginTop={1}>
           <Grid item>
             <IconButton color="primary" aria-label="upload picture" component="label">
               <input hidden accept="image/*" type="file" />
@@ -412,7 +500,7 @@ const CadastroPF = (props: any) => {
             </IconButton>
           </Grid>
           <Grid item>
-            {<Button variant="contained" type="submit"   >Salvar</Button>}
+            {<Button variant="contained" type="submit"   startIcon={<SaveIcon />}> Salvar</Button>}
           </Grid>
           <Grid item>
             <Button
@@ -425,7 +513,7 @@ const CadastroPF = (props: any) => {
                 formik.resetForm();
               }}
 
-              variant={"outlined"} >Limpar Dados</Button>
+              variant={"outlined"} startIcon={<ReplayCircleFilledIcon />}> Limpar Dados</Button>
 
           </Grid>
         </Grid>

@@ -7,14 +7,14 @@ import { FormSelectProps } from './FormSelectProps';
 
 
 
-export const MySelect = ({ options, handleChange, label, cdestadocivil }: FormSelectProps) => {
+export const MySelect = ({ options, handleChange, label, value, width }: FormSelectProps) => {
 
     return (
         <div>
-            <FormControl sx={{ width: 190 }} size="small">
+            <FormControl sx={{ width: {width} }} size="small">
                 <InputLabel id="demo-controlled-open-select-label">{label}</InputLabel>
                 <Select
-                    value={cdestadocivil}
+                    value={value}
                     onChange={handleChange}
                     size="small"
                     labelId="demo-select-small"
@@ -41,15 +41,15 @@ export const MySelect = ({ options, handleChange, label, cdestadocivil }: FormSe
 
 
 
-export const MySelectMultiple = ({ options, handleChange, label, representanteslegais }: FormSelectProps) => {
+export const MySelectMultiple = ({ options, handleChange, label, valueMulti, width }: FormSelectProps) => {
 
     return (
         <div>
-            <FormControl sx={{ width: 500 }} size="small">
+            <FormControl sx={{ width: {width} }} size="small">
                 <InputLabel id="demo-controlled-open-select-label">{label}</InputLabel>
                 <Select
                     multiple
-                    value={representanteslegais}
+                    value={valueMulti}
                     onChange={handleChange}
                     size="small"
                     labelId="demo-select-small"
