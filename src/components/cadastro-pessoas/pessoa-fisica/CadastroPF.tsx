@@ -1,18 +1,18 @@
 import { useForm } from "react-hook-form";
-import { FormInputText } from "./form-components/FormInputText";
-import { estadoCivilOptions, FormValuesPessoaPF, initialValues } from "../../../utils/cadastro-pf/constants";
+import { FormInputText } from "../form-components/FormInputText";
+import { estadoCivilOptions, FormValuesPessoaPF, initialValuesPF } from "../../../utils/cadastro-pf/constants";
 import { Button, Grid, IconButton, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import axios from "axios";
 import TextField from '@mui/material/TextField';
-import { FormInputMask } from "./form-components/FormInputMask";
+import { FormInputMask } from "../form-components/FormInputMask";
 import Swal from 'sweetalert2';
-import { FormInpuTextCEP } from "./form-components/FormInpuTextCEP";
+import { FormInpuTextCEP } from "../form-components/FormInpuTextCEP";
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { MySelect } from "./form-components/FormInputDropdown";
+import { MySelect } from "../form-components/FormInputDropdown";
 
 
 const CadastroPF = (props: any) => {
@@ -30,7 +30,7 @@ const CadastroPF = (props: any) => {
 
 
 
-  const methods = useForm<FormValuesPessoaPF>({ defaultValues: initialValues });
+  const methods = useForm<FormValuesPessoaPF>({ defaultValues: initialValuesPF });
   const { reset, control, setValue } = methods;
 
 
@@ -53,7 +53,7 @@ const CadastroPF = (props: any) => {
 
 
   const formik = useFormik({
-    initialValues: initialValues,
+    initialValues: initialValuesPF,
     validationSchema: CadPFSchema,
     onSubmit: (values) => {
 
@@ -307,7 +307,7 @@ const CadastroPF = (props: any) => {
                 event.preventDefault();
 
                 setAddressData(undefined);
-                setAddressData(initialValues);
+                setAddressData(initialValuesPF);
                 axios(`${BASE_URL}/${formik.values.cep}/json`)
                   .then(response => {
                     setAddressData(response.data)
@@ -408,7 +408,7 @@ const CadastroPF = (props: any) => {
               onClick={(event: any) => {
                 event.preventDefault();
 
-                setAddressData(initialValues);
+                setAddressData(initialValuesPF);
                 formik.resetForm();
               }}
 
