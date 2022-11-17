@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import { FormInpuTextCEP, FormInputMask, FormInputText } from "../../form-components/FormInput";
 import { Button, Grid, IconButton, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
@@ -9,17 +8,18 @@ import Swal from 'sweetalert2';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { FormValuesPessoaPJ, initialValuesPJ, representantesLegaisOptions } from "../../../utils/cadastro-pessoas/constantspj";
 import { SelectChangeEvent } from '@mui/material/Select';
-import { MySelectMultiple } from "../../form-components/FormInputDropdown";
 import SearchIcon from '@mui/icons-material/Search';
 import SaveIcon from '@mui/icons-material/Save';
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { enderecoOptions, FormValuesEndereco, initialValuesEndereco } from "../../utils/cadastro-endereco/constantsendereco";
+import { MySelect } from "../form-components/FormInputDropdown";
+import { FormInpuTextCEP, FormInputMask, FormInputText } from "../form-components/FormInput";
 
 
 
-const CadastroPJ = (props: any) => {
+const CadastroEndereco = (props: any) => {
 
 
     const theme = createTheme({
@@ -34,41 +34,40 @@ const CadastroPJ = (props: any) => {
 
 
 
-    const methods = useForm<FormValuesPessoaPJ>({ defaultValues: initialValuesPJ });
+    const methods = useForm<FormValuesEndereco>({ defaultValues: initialValuesEndereco });
     const { reset, control, setValue } = methods;
 
 
 
     const BASE_URL = 'https://viacep.com.br/ws'
 
-    const [addressData, setAddressData] = useState<FormValuesPessoaPJ>();
+    const [addressData, setAddressData] = useState<FormValuesEndereco>();
 
-    const CadPJSchema = yup.object().shape({
-        nomeEmpresarial: yup.string().required('Informe o nome completo.'),
-        cnpj: yup.string().required('Informe o cnpj.'),
-
-
-    });
+    // const CadPJSchema = yup.object().shape({
+    //     nomeEmpresarial: yup.string().required('Informe o nome completo.'),
+    //     cnpj: yup.string().required('Informe o cnpj.'),
 
 
+    // });
 
-    const [representanteslegais, setRepresentantesLEgais] = useState<any[]>([]);
 
-    const handleChange = (event: SelectChangeEvent<typeof representanteslegais>) => {
+
+    const [enderecoFiltro, setEnderecoFiltro] = useState('');
+
+    const handleChange = (event: SelectChangeEvent<typeof enderecoFiltro>) => {
         const {
             target: { value },
         } = event;
-        setRepresentantesLEgais(
-            // On autofill we get a stringified value.
-            typeof value === 'string' ? value.split(',') : value,
-        );
+        setEnderecoFiltro(value);
     };
 
 
 
+
+
     const formik = useFormik({
-        initialValues: initialValuesPJ,
-        validationSchema: CadPJSchema,
+        initialValues: initialValuesEndereco,
+        // validationSchema: CadPJSchema,
         onSubmit: (values) => {
 
 
@@ -82,8 +81,7 @@ const CadastroPJ = (props: any) => {
             values.bairro = bairro;
             values.localidade = localidade;
             values.uf = uf;
-            values.representantesLegais = representanteslegais;
-
+            values.enderecoFiltro = enderecoFiltro;
 
 
             if (values.logradouro == '' || values.logradouro == undefined) {
@@ -107,37 +105,16 @@ const CadastroPJ = (props: any) => {
 
                     <Grid item xs={4}>
 
-                        <FormInputText
-                            name="nomeEmpresarialFiltro"
-                            label="Nome Empresarial"
-                            values={formik.values.nomeEmpresarialFiltro}
-                            onChange={formik.handleChange}
-                            helpertext={formik.touched.nomeEmpresarialFiltro && formik.errors.nomeEmpresarialFiltro}
-                            error={formik.touched.nomeEmpresarialFiltro && Boolean(formik.errors.nomeEmpresarialFiltro)} />
+                        <MySelect
+                            label="Endereços"
+                            options={enderecoOptions}
+                            value={enderecoFiltro}
+                            handleChange={handleChange}
+
+                        />
 
                     </Grid>
 
-
-
-
-                    <Grid item xs={3}>
-                    <FormInputMask
-                                mask="99.999.999/0001-99"
-                                values={formik.values.cnpjFiltro}
-                                disabled={false}
-                                maskChar=" "
-                                onChange={formik.handleChange}
-                            >
-                                {() => <TextField
-                                    name="cnpjFiltro"
-                                    label="CNPJ"
-                                    helperText={formik.touched.cnpjFiltro && formik.errors.cnpjFiltro}
-                                    error={formik.touched.cnpjFiltro && Boolean(formik.errors.cnpjFiltro)}
-                                    fullWidth
-                                    size="small"
-                                />}
-                            </FormInputMask>
-                    </Grid>
 
 
                     <Grid item xs={3}>
@@ -179,70 +156,6 @@ const CadastroPJ = (props: any) => {
                     </Grid>
 
                 </Grid>
-
-
-
-                <h3>Informações Pessoais:</h3>
-
-                <Paper
-                    style={{
-                        display: "grid",
-                        gridRowGap: "20px",
-                        padding: "20px",
-                        margin: "10px 0px 0px 0px"
-                    }}
-                >
-
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                        <Grid item xs={4}>
-
-                            <FormInputText
-                                name="nomeEmpresarial"
-                                label="Nome Empresarial"
-                                values={formik.values.nomeEmpresarial}
-                                onChange={formik.handleChange}
-                                helpertext={formik.touched.nomeEmpresarial && formik.errors.nomeEmpresarial}
-                                error={formik.touched.nomeEmpresarial && Boolean(formik.errors.nomeEmpresarial)} />
-
-
-                        </Grid>
-
-                        <Grid item xs={3}>
-                            <FormInputMask
-                                mask="99.999.999/0001-99"
-                                values={formik.values.cnpj}
-                                disabled={false}
-                                maskChar=" "
-                                onChange={formik.handleChange}
-                            >
-                                {() => <TextField
-                                    name="cnpj"
-                                    label="CNPJ"
-                                    helperText={formik.touched.cnpj && formik.errors.cnpj}
-                                    error={formik.touched.cnpj && Boolean(formik.errors.cnpj)}
-                                    fullWidth
-                                    size="small"
-                                />}
-                            </FormInputMask>
-                        </Grid>
-
-
-                        <Grid item xs={5}>
-                            <MySelectMultiple
-                                label="Representantes Legais"
-                                options={representantesLegaisOptions}
-                                valueMulti={representanteslegais}
-                                handleChange={handleChange}
-                                
-
-                            />
-                        </Grid>
-
-
-
-                    </Grid>
-
-                </Paper >
 
                 <h3>Endereço:</h3>
 
@@ -288,7 +201,7 @@ const CadastroPJ = (props: any) => {
                                 event.preventDefault();
 
                                 setAddressData(undefined);
-                                setAddressData(initialValuesPJ);
+                                setAddressData(initialValuesEndereco);
                                 axios(`${BASE_URL}/${formik.values.cep}/json`)
                                     .then(response => {
                                         setAddressData(response.data)
@@ -307,7 +220,7 @@ const CadastroPJ = (props: any) => {
 
                                     });
 
-                            }}  startIcon={<SearchIcon />}>Buscar CEP</Button>}
+                            }} startIcon={<SearchIcon />}>Buscar CEP</Button>}
                         </Grid>
 
 
@@ -381,7 +294,7 @@ const CadastroPJ = (props: any) => {
                         </IconButton>
                     </Grid>
                     <Grid item>
-                        {<Button variant="contained" type="submit"    startIcon={<SaveIcon />}>Salvar</Button>}
+                        {<Button variant="contained" type="submit" startIcon={<SaveIcon />}>Salvar</Button>}
                     </Grid>
                     <Grid item>
                         <Button
@@ -389,8 +302,8 @@ const CadastroPJ = (props: any) => {
                             onClick={(event: any) => {
                                 event.preventDefault();
 
-                                setAddressData(initialValuesPJ);
-                                setRepresentantesLEgais([]);
+                                setAddressData(initialValuesEndereco);
+
                                 formik.resetForm();
                             }}
 
@@ -411,4 +324,4 @@ const CadastroPJ = (props: any) => {
     );
 };
 
-export default CadastroPJ;
+export default CadastroEndereco;

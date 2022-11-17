@@ -7,7 +7,7 @@ import * as yup from 'yup';
 import { MySelect } from "../../form-components/FormInputDropdown";
 import { FormInputText } from "../../form-components/FormInput";
 import SaveIcon from '@mui/icons-material/Save';
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const CadastroUsuario = (props: any) => {
@@ -165,6 +165,10 @@ const CadastroUsuario = (props: any) => {
 
                     <Grid item>
                         {<Button variant="contained" type="submit"  startIcon={<SaveIcon />}>Salvar</Button>}
+                    </Grid>
+
+                    <Grid item>
+                        {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
                     </Grid>
                    
                 </Grid>

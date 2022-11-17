@@ -7,7 +7,7 @@ import { MySelect } from "../../form-components/FormInputDropdown";
 import { FormInputText } from "../../form-components/FormInput";
 import SaveIcon from '@mui/icons-material/Save';
 import { initialValuesCadContas, tipoContaOptions, tipoSaldoOptions } from "../../../utils/cadastro-contascontabeis/contantscontas";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const CadastroContas = (props: any) => {
@@ -165,6 +165,10 @@ const CadastroContas = (props: any) => {
 
                     <Grid item>
                         {<Button variant="contained" type="submit"  startIcon={<SaveIcon />}>Salvar</Button>}
+                    </Grid>
+
+                    <Grid item>
+                        {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
                     </Grid>
                    
                 </Grid>

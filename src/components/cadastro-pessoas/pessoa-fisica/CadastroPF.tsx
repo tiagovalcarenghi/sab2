@@ -15,6 +15,7 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import SearchIcon from '@mui/icons-material/Search';
 import SaveIcon from '@mui/icons-material/Save';
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const CadastroPF = (props: any) => {
 
@@ -516,6 +517,10 @@ const CadastroPF = (props: any) => {
               variant={"outlined"} startIcon={<ReplayCircleFilledIcon />}> Limpar Dados</Button>
 
           </Grid>
+
+          <Grid item>
+                        {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
+                    </Grid>
         </Grid>
 
 

@@ -9,7 +9,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import { initialValuesCadContas, tipoContaOptions, tipoSaldoOptions } from "../../../utils/cadastro-contascontabeis/contantscontas";
 import { baseContasComplementaresOptions, initialValuesCadContasComp } from "../../../utils/cadastro-contascontabeis/contantscontascomp";
 import { FormCheckBox } from "../../form-components/FormCheckBox";
-
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const CadastroContasComp = (props: any) => {
@@ -134,6 +134,10 @@ const CadastroContasComp = (props: any) => {
 
                     <Grid item>
                         {<Button variant="contained" type="submit" startIcon={<SaveIcon />}>Salvar</Button>}
+                    </Grid>
+
+                    <Grid item>
+                        {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
                     </Grid>
 
                 </Grid>

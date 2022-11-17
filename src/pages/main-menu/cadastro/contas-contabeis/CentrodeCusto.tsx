@@ -1,5 +1,4 @@
-
-import { Typography } from "@mui/material";
+import CadCentrodeCusto from "../../../../components/cadastro-contascontabeis/centro-de-custo/CadCentrodeCusto";
 
 
 
@@ -7,9 +6,7 @@ const CentrodeCusto = (props: any) => {
 
     return (
 
-                <Typography>
-                    Cadastro-CentrodeCusto
-                </Typography>
+               <CadCentrodeCusto />
             
        
     );

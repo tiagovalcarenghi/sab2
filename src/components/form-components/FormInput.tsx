@@ -94,3 +94,26 @@ export const FormInputMask = ({ mask, values, disabled, maskChar, children, onCh
   );
 
 };
+
+
+
+export const FormInputMultilineText = ({ name, error, helpertext, label, values, onChange }: FormInputProps) => {
+
+  return (
+    < TextField
+      fullWidth
+      id={name}
+      name={name}
+      label={label}
+      value={values}
+      onChange={onChange}
+      error={error}
+      helperText={helpertext}
+      rows={12}
+      multiline
+      InputLabelProps={{
+        shrink: true,
+      }}
+    />
+  );
+};
