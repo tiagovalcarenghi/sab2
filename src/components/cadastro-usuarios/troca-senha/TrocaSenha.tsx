@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { initialValuesTrocaSenha } from "../../../utils/cadastro-usuarios/constantstrocasenha";
 import { FormInputText } from "../../form-components/FormInput";
-
+import SaveIcon from '@mui/icons-material/Save';
 
 
 const TrocaSenha = (props: any) => {
@@ -135,7 +135,7 @@ const TrocaSenha = (props: any) => {
                 <Grid container spacing={2} justifyContent="flex-start" marginTop={5}>
 
                     <Grid item>
-                        {<Button variant="contained" type="submit"   >Salvar</Button>}
+                        {<Button variant="contained" type="submit"  startIcon={<SaveIcon />}>Salvar</Button>}
                     </Grid>
 
                 </Grid>

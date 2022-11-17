@@ -2,15 +2,15 @@ import { Button, Grid, Paper, SelectChangeEvent } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from "formik";
 import { useState } from "react";
-import { initialValuesCadUsu, pessoaFisicaOptions, tipoAcessoOptions } from "../../../utils/cadastro-usuarios/constantscadusu";
 import * as yup from 'yup';
 import { MySelect } from "../../form-components/FormInputDropdown";
 import { FormInputText } from "../../form-components/FormInput";
 import SaveIcon from '@mui/icons-material/Save';
+import { initialValuesCadContas, tipoContaOptions, tipoSaldoOptions } from "../../../utils/cadastro-contascontabeis/contantscontas";
 
 
 
-const CadastroUsuario = (props: any) => {
+const CadastroContas = (props: any) => {
 
 
     const theme = createTheme({
@@ -24,43 +24,43 @@ const CadastroUsuario = (props: any) => {
     });
 
 
-    const CadUsuSchema = yup.object().shape({
-        usuario: yup.string().required('Informe o usuário.'),
-        senha: yup.string().required('Informe a senha.'),
-
+    const CadContasSchema = yup.object().shape({
+        nomeConta: yup.string().required('Informe o nome da Conta.'),
+        
     });
 
 
 
-    const [pessoaFisica, setPessoaFisica] = useState('');
+    const [tipoConta, setTipoConta] = useState('');
 
-    const handleChange = (event: SelectChangeEvent<typeof pessoaFisica>) => {
+    const handleChange = (event: SelectChangeEvent<typeof tipoConta>) => {
         const {
             target: { value },
         } = event;
-        setPessoaFisica(value);
+        setTipoConta(value);
     };
 
 
-    const [tipoAccesso, setTipoAcesso] = useState('');
+    const [tipoSaldoInicial, setTipoSaldo] = useState('');
 
-    const handleChange2 = (event: SelectChangeEvent<typeof tipoAccesso>) => {
+    const handleChange2 = (event: SelectChangeEvent<typeof tipoSaldoInicial>) => {
         const {
             target: { value },
         } = event;
-        setTipoAcesso(value);
+        setTipoSaldo(value);
     };
 
 
 
 
     const formik = useFormik({
-        initialValues: initialValuesCadUsu,
-        validationSchema: CadUsuSchema,
+        initialValues: initialValuesCadContas,
+        validationSchema: CadContasSchema,
         onSubmit: (values) => {
 
-            values.pessoaFisica = pessoaFisica;
-            values.tipoAcesso = tipoAccesso;
+
+            values.tipoConta = tipoConta;
+            values.tipoSaldoInicial = tipoSaldoInicial;
 
             alert(JSON.stringify(values, null, 2));
         },
@@ -89,29 +89,32 @@ const CadastroUsuario = (props: any) => {
 
 
                         <Grid item xs={4}>
-                            <MySelect
-                                label="Pessoa"
-                                options={pessoaFisicaOptions}
-                                value={pessoaFisica}
+
+                        <FormInputText
+                                name="nomeConta"
+                                label="Nome Conta"
+                                values={formik.values.nomeConta}
+                                onChange={formik.handleChange}
+                                helpertext={formik.touched.nomeConta && formik.errors.nomeConta}
+                                error={formik.touched.nomeConta && Boolean(formik.errors.nomeConta)} />
+
+                          
+                        </Grid>
+
+
+                    </Grid>
+
+                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+                        <Grid item xs={4}>
+                        <MySelect
+                                label="Tipo Conta"
+                                options={tipoContaOptions}
+                                value={tipoConta}
                                 handleChange={handleChange}
-                                
+                               
                             />
-                        </Grid>
-
-
-                    </Grid>
-
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-
-                        <Grid item xs={4}>
-
-                            <FormInputText
-                                name="usuario"
-                                label="Usuário"
-                                values={formik.values.usuario}
-                                onChange={formik.handleChange}
-                                helpertext={formik.touched.usuario && formik.errors.usuario}
-                                error={formik.touched.usuario && Boolean(formik.errors.usuario)} />
+                           
 
                         </Grid>
 
@@ -124,34 +127,31 @@ const CadastroUsuario = (props: any) => {
                         <Grid item xs={4}>
 
                             <FormInputText
-                                name="senha"
-                                label="Senha"
-                                values={formik.values.senha}
+                                name="saldoInicial"
+                                label="Saldo Inicial"
+                                values={formik.values.saldoInicial}
                                 onChange={formik.handleChange}
-                                helpertext={formik.touched.senha && formik.errors.senha}
-                                error={formik.touched.senha && Boolean(formik.errors.senha)} />
+                                helpertext={formik.touched.saldoInicial && formik.errors.saldoInicial}
+                                error={formik.touched.saldoInicial && Boolean(formik.errors.saldoInicial)} />
 
                         </Grid>
 
 
-                    </Grid>
-
-
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-
-
-                        <Grid item xs={4}>
+                        <Grid item xs={2}>
                             <MySelect
-                                label="Tipo Acesso"
-                                options={tipoAcessoOptions}
-                                value={tipoAccesso}
+                                label="Tipo Saldo"
+                                options={tipoSaldoOptions}
+                                value={tipoSaldoInicial}
                                 handleChange={handleChange2}
-                              
+                               
                             />
                         </Grid>
 
+
                     </Grid>
 
+
+                  
 
 
                 </Paper >
@@ -177,4 +177,4 @@ const CadastroUsuario = (props: any) => {
     );
 };
 
-export default CadastroUsuario;
+export default CadastroContas;

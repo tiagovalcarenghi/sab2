@@ -7,13 +7,14 @@ import { FormSelectProps } from './FormSelectProps';
 
 
 
-export const MySelect = ({ options, handleChange, label, value, width }: FormSelectProps) => {
+export const MySelect = ({ options, handleChange, label, value }: FormSelectProps) => {
 
     return (
         <div>
-            <FormControl sx={{ width: {width} }} size="small">
+            <FormControl fullWidth size="small">
                 <InputLabel id="demo-controlled-open-select-label">{label}</InputLabel>
                 <Select
+                    fullWidth
                     value={value}
                     onChange={handleChange}
                     size="small"
@@ -41,13 +42,14 @@ export const MySelect = ({ options, handleChange, label, value, width }: FormSel
 
 
 
-export const MySelectMultiple = ({ options, handleChange, label, valueMulti, width }: FormSelectProps) => {
+export const MySelectMultiple = ({ options, handleChange, label, valueMulti }: FormSelectProps) => {
 
     return (
         <div>
-            <FormControl sx={{ width: {width} }} size="small">
+            <FormControl fullWidth  size="small">
                 <InputLabel id="demo-controlled-open-select-label">{label}</InputLabel>
                 <Select
+                    fullWidth
                     multiple
                     value={valueMulti}
                     onChange={handleChange}

@@ -230,7 +230,7 @@ const CadastroPF = (props: any) => {
                 options={estadoCivilOptions}
                 value={cdestadocivil}
                 handleChange={handleChange2}
-                width={218}
+               
 
               />
             </Grid>

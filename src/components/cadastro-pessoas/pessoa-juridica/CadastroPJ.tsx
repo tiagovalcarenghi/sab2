@@ -229,13 +229,13 @@ const CadastroPJ = (props: any) => {
                         </Grid>
 
 
-                        <Grid item xs={4}>
+                        <Grid item xs={5}>
                             <MySelectMultiple
                                 label="Representantes Legais"
                                 options={representantesLegaisOptions}
                                 valueMulti={representanteslegais}
                                 handleChange={handleChange}
-                                width={500}
+                                
 
                             />
                         </Grid>

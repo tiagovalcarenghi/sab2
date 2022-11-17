@@ -4,5 +4,4 @@ export interface FormSelectProps {
   handleChange?: any;
   label?: string;
   value?: any;
-  width?: any;
 }
