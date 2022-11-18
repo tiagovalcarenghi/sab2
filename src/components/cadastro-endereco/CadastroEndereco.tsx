@@ -13,9 +13,10 @@ import SearchIcon from '@mui/icons-material/Search';
 import SaveIcon from '@mui/icons-material/Save';
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { enderecoOptions, FormValuesEndereco, initialValuesEndereco } from "../../utils/cadastro-endereco/constantsendereco";
+import { FormValuesEndereco, initialValuesEndereco } from "../../utils/cadastro-endereco/constantsendereco";
 import { MySelect } from "../form-components/FormInputDropdown";
 import { FormInpuTextCEP, FormInputMask, FormInputText } from "../form-components/FormInput";
+import { enderecoOptions } from "../../utils/constantscadastros";
 
 
 

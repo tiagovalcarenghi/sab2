@@ -7,9 +7,10 @@ import { MySelect } from "../../form-components/FormInputDropdown";
 import { FormInputText } from "../../form-components/FormInput";
 import SaveIcon from '@mui/icons-material/Save';
 import { initialValuesCadContas, tipoContaOptions, tipoSaldoOptions } from "../../../utils/cadastro-contascontabeis/contantscontas";
-import { baseContasComplementaresOptions, initialValuesCadContasComp } from "../../../utils/cadastro-contascontabeis/contantscontascomp";
+import { initialValuesCadContasComp } from "../../../utils/cadastro-contascontabeis/contantscontascomp";
 import { FormCheckBox } from "../../form-components/FormCheckBox";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { baseContasComplementaresOptions } from "../../../utils/constantscadastros";
 
 
 const CadastroContasComp = (props: any) => {

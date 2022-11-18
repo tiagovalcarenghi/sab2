@@ -16,6 +16,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import SaveIcon from '@mui/icons-material/Save';
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { pessoaFisicaOptions } from "../../../utils/constantscadastros";
 
 const CadastroPF = (props: any) => {
 
@@ -51,6 +52,17 @@ const CadastroPF = (props: any) => {
 
 
   });
+
+
+  const [nomeCompletoFiltro, setNomeCompletoFiltro] = useState('');
+
+  const handleChange = (event: SelectChangeEvent<typeof nomeCompletoFiltro>) => {
+      const {
+          target: { value },
+      } = event;
+      setNomeCompletoFiltro(value);
+  };
+
 
 
 
@@ -106,13 +118,13 @@ const CadastroPF = (props: any) => {
 
           <Grid item xs={4}>
 
-            <FormInputText
-              name="nomeCompletoFiltro"
-              label="Nome Completo"
-              values={formik.values.nomeCompletoFiltro}
-              onChange={formik.handleChange}
-              helpertext={formik.touched.nomeCompletoFiltro && formik.errors.nomeCompletoFiltro}
-              error={formik.touched.nomeCompletoFiltro && Boolean(formik.errors.nomeCompletoFiltro)} />
+          <MySelect
+                                label="Pessoa"
+                                options={pessoaFisicaOptions}
+                                value={nomeCompletoFiltro}
+                                handleChange={handleChange}
+                                
+                            />
 
           </Grid>
 

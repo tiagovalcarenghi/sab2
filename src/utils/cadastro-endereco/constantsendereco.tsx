@@ -22,14 +22,6 @@ export const initialValuesEndereco = {
   }
   
   
-  export const enderecoOptions = [
-    { value: 1, label: "Rua Dona Cecília, 603" },
-    { value: 2, label: "Rua João da Silva, 1030 Ap 403 Bloco 02" },
-    { value: 3, label: "Avenida General Flores da Cunha, 1236" },
-  ];
-  
-  
-  
-  
+ 
   
   

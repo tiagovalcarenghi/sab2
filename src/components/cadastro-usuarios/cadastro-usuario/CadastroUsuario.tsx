@@ -2,12 +2,13 @@ import { Button, Grid, Paper, SelectChangeEvent } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from "formik";
 import { useState } from "react";
-import { initialValuesCadUsu, pessoaFisicaOptions, tipoAcessoOptions } from "../../../utils/cadastro-usuarios/constantscadusu";
+import { initialValuesCadUsu, tipoAcessoOptions } from "../../../utils/cadastro-usuarios/constantscadusu";
 import * as yup from 'yup';
 import { MySelect } from "../../form-components/FormInputDropdown";
 import { FormInputText } from "../../form-components/FormInput";
 import SaveIcon from '@mui/icons-material/Save';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { pessoaFisicaOptions } from "../../../utils/constantscadastros";
 
 
 const CadastroUsuario = (props: any) => {
