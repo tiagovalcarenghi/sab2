@@ -14,7 +14,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { FormValuesEndereco, initialValuesEndereco } from "../../utils/cadastro-endereco/constantsendereco";
-import { MySelect } from "../form-components/FormInputDropdown";
+import { MyAutoComplete, MySelect } from "../form-components/FormInputDropdown";
 import { FormInpuTextCEP, FormInputMask, FormInputText } from "../form-components/FormInput";
 import { enderecoOptions } from "../../utils/constantscadastros";
 
@@ -55,13 +55,9 @@ const CadastroEndereco = (props: any) => {
 
     const [enderecoFiltro, setEnderecoFiltro] = useState('');
 
-    const handleChange = (event: SelectChangeEvent<typeof enderecoFiltro>) => {
-        const {
-            target: { value },
-        } = event;
-        setEnderecoFiltro(value);
+    const handleChange = (event: any, newValue: string) => {
+        setEnderecoFiltro(newValue);
     };
-
 
 
 
@@ -82,7 +78,7 @@ const CadastroEndereco = (props: any) => {
             values.bairro = bairro;
             values.localidade = localidade;
             values.uf = uf;
-            values.enderecoFiltro = enderecoFiltro;
+
 
 
             if (values.logradouro == '' || values.logradouro == undefined) {
@@ -106,7 +102,9 @@ const CadastroEndereco = (props: any) => {
 
                     <Grid item xs={4}>
 
-                        <MySelect
+
+
+                        <MyAutoComplete
                             label="Endereços"
                             options={enderecoOptions}
                             value={enderecoFiltro}
@@ -122,32 +120,11 @@ const CadastroEndereco = (props: any) => {
 
                         {<Button color="primary" variant="contained"
 
+                            onClick={(event: any,) => {
 
-                            // onClick={(event: any) => {
+                                alert(JSON.stringify(enderecoFiltro));
 
-                            //   event.preventDefault();
-
-                            //   setAddressData(undefined);
-                            //   setAddressData(initialValuesPF);
-                            //   axios(`${BASE_URL}/${formik.values.cep}/json`)
-                            //     .then(response => {
-                            //       setAddressData(response.data)
-
-
-                            //     })
-                            //     .catch(() => {
-
-                            //       Swal.fire({
-                            //         title: 'Atenção',
-                            //         text: 'CEP inválido ou incompleto.',
-                            //         icon: 'error',
-                            //         confirmButtonText: 'OK'
-                            //       })
-
-
-                            //     });
-
-                            // }}
+                            }}
 
 
                             startIcon={<SearchIcon />}>

@@ -3,11 +3,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from 'yup';
-import { MySelect } from "../../form-components/FormInputDropdown";
+import { MyAutoComplete, MySelect } from "../../form-components/FormInputDropdown";
 import { FormInputText } from "../../form-components/FormInput";
 import SaveIcon from '@mui/icons-material/Save';
 import { initialValuesCadContas, tipoContaOptions, tipoSaldoOptions } from "../../../utils/cadastro-contascontabeis/contantscontas";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { contasOptions } from "../../../utils/constantscadastros";
+import SearchIcon from '@mui/icons-material/Search';
 
 
 const CadastroContas = (props: any) => {
@@ -26,7 +28,7 @@ const CadastroContas = (props: any) => {
 
     const CadContasSchema = yup.object().shape({
         nomeConta: yup.string().required('Informe o nome da Conta.'),
-        
+
     });
 
 
@@ -48,6 +50,14 @@ const CadastroContas = (props: any) => {
             target: { value },
         } = event;
         setTipoSaldo(value);
+    };
+
+
+
+    const [nomeContaFiltro, setNomeContaFiltro] = useState('');
+
+    const handleChange3 = (event: any, newValue: string) => {
+        setNomeContaFiltro(newValue);
     };
 
 
@@ -74,6 +84,39 @@ const CadastroContas = (props: any) => {
 
             <ThemeProvider theme={theme}>
 
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+                    <Grid item xs={4}>
+
+                        <MyAutoComplete
+                            label="Contas"
+                            options={contasOptions}
+                            value={nomeContaFiltro}
+                            handleChange={handleChange3}
+
+                        />
+
+                    </Grid>
+
+                    <Grid item xs={3}>
+
+                        {<Button color="primary" variant="contained"
+
+                            onClick={(event: any,) => {
+
+                                alert(JSON.stringify(nomeContaFiltro));
+
+                            }}
+
+
+                            startIcon={<SearchIcon />}>
+                            Filtrar
+                        </Button>}
+
+                    </Grid>
+
+                </Grid>
+
 
                 <Paper
                     style={{
@@ -84,13 +127,15 @@ const CadastroContas = (props: any) => {
                     }}
                 >
 
+
+
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
 
 
                         <Grid item xs={4}>
 
-                        <FormInputText
+                            <FormInputText
                                 name="nomeConta"
                                 label="Nome Conta"
                                 values={formik.values.nomeConta}
@@ -98,7 +143,7 @@ const CadastroContas = (props: any) => {
                                 helpertext={formik.touched.nomeConta && formik.errors.nomeConta}
                                 error={formik.touched.nomeConta && Boolean(formik.errors.nomeConta)} />
 
-                          
+
                         </Grid>
 
 
@@ -107,14 +152,14 @@ const CadastroContas = (props: any) => {
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
 
                         <Grid item xs={4}>
-                        <MySelect
+                            <MySelect
                                 label="Tipo Conta"
                                 options={tipoContaOptions}
                                 value={tipoConta}
                                 handleChange={handleChange}
-                               
+
                             />
-                           
+
 
                         </Grid>
 
@@ -143,7 +188,7 @@ const CadastroContas = (props: any) => {
                                 options={tipoSaldoOptions}
                                 value={tipoSaldoInicial}
                                 handleChange={handleChange2}
-                               
+
                             />
                         </Grid>
 
@@ -151,7 +196,7 @@ const CadastroContas = (props: any) => {
                     </Grid>
 
 
-                  
+
 
 
                 </Paper >
@@ -164,13 +209,13 @@ const CadastroContas = (props: any) => {
                 <Grid container spacing={2} justifyContent="flex-start" marginTop={1}>
 
                     <Grid item>
-                        {<Button variant="contained" type="submit"  startIcon={<SaveIcon />}>Salvar</Button>}
+                        {<Button variant="contained" type="submit" startIcon={<SaveIcon />}>Salvar</Button>}
                     </Grid>
 
                     <Grid item>
                         {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
                     </Grid>
-                   
+
                 </Grid>
 
 

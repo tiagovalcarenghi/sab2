@@ -11,11 +11,12 @@ import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { FormValuesPessoaPJ, initialValuesPJ, representantesLegaisOptions } from "../../../utils/cadastro-pessoas/constantspj";
 import { SelectChangeEvent } from '@mui/material/Select';
-import { MySelectMultiple } from "../../form-components/FormInputDropdown";
+import { MyAutoComplete, MySelectMultiple } from "../../form-components/FormInputDropdown";
 import SearchIcon from '@mui/icons-material/Search';
 import SaveIcon from '@mui/icons-material/Save';
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { pessoaJuridicaOptions } from "../../../utils/constantscadastros";
 
 
 
@@ -46,8 +47,6 @@ const CadastroPJ = (props: any) => {
     const CadPJSchema = yup.object().shape({
         nomeEmpresarial: yup.string().required('Informe o nome completo.'),
         cnpj: yup.string().required('Informe o cnpj.'),
-
-
     });
 
 
@@ -63,6 +62,15 @@ const CadastroPJ = (props: any) => {
             typeof value === 'string' ? value.split(',') : value,
         );
     };
+
+
+
+    const [nomeEmpresarialFiltro, setNomeEmpresarialFiltro] = useState('');
+
+    const handleChange2 = (event: any, newValue: string) => {
+        setNomeEmpresarialFiltro(newValue);
+    };
+
 
 
 
@@ -107,13 +115,14 @@ const CadastroPJ = (props: any) => {
 
                     <Grid item xs={4}>
 
-                        <FormInputText
-                            name="nomeEmpresarialFiltro"
+                        <MyAutoComplete
                             label="Nome Empresarial"
-                            values={formik.values.nomeEmpresarialFiltro}
-                            onChange={formik.handleChange}
-                            helpertext={formik.touched.nomeEmpresarialFiltro && formik.errors.nomeEmpresarialFiltro}
-                            error={formik.touched.nomeEmpresarialFiltro && Boolean(formik.errors.nomeEmpresarialFiltro)} />
+                            options={pessoaJuridicaOptions}
+                            value={nomeEmpresarialFiltro}
+                            handleChange={handleChange2}
+
+                        />
+
 
                     </Grid>
 
@@ -121,22 +130,22 @@ const CadastroPJ = (props: any) => {
 
 
                     <Grid item xs={3}>
-                    <FormInputMask
-                                mask="99.999.999/0001-99"
-                                values={formik.values.cnpjFiltro}
-                                disabled={false}
-                                maskChar=" "
-                                onChange={formik.handleChange}
-                            >
-                                {() => <TextField
-                                    name="cnpjFiltro"
-                                    label="CNPJ"
-                                    helperText={formik.touched.cnpjFiltro && formik.errors.cnpjFiltro}
-                                    error={formik.touched.cnpjFiltro && Boolean(formik.errors.cnpjFiltro)}
-                                    fullWidth
-                                    size="small"
-                                />}
-                            </FormInputMask>
+                        <FormInputMask
+                            mask="99.999.999/0001-99"
+                            values={formik.values.cnpjFiltro}
+                            disabled={false}
+                            maskChar=" "
+                            onChange={formik.handleChange}
+                        >
+                            {() => <TextField
+                                name="cnpjFiltro"
+                                label="CNPJ"
+                                helperText={formik.touched.cnpjFiltro && formik.errors.cnpjFiltro}
+                                error={formik.touched.cnpjFiltro && Boolean(formik.errors.cnpjFiltro)}
+                                fullWidth
+                                size="small"
+                            />}
+                        </FormInputMask>
                     </Grid>
 
 
@@ -145,31 +154,11 @@ const CadastroPJ = (props: any) => {
                         {<Button color="primary" variant="contained"
 
 
-                            // onClick={(event: any) => {
+                            onClick={(event: any,) => {
 
-                            //   event.preventDefault();
+                                alert(JSON.stringify(nomeEmpresarialFiltro) + '\n cpffiltro: ' + formik.values.cnpjFiltro);
 
-                            //   setAddressData(undefined);
-                            //   setAddressData(initialValuesPF);
-                            //   axios(`${BASE_URL}/${formik.values.cep}/json`)
-                            //     .then(response => {
-                            //       setAddressData(response.data)
-
-
-                            //     })
-                            //     .catch(() => {
-
-                            //       Swal.fire({
-                            //         title: 'Atenção',
-                            //         text: 'CEP inválido ou incompleto.',
-                            //         icon: 'error',
-                            //         confirmButtonText: 'OK'
-                            //       })
-
-
-                            //     });
-
-                            // }}
+                            }}
 
 
                             startIcon={<SearchIcon />}>
@@ -233,7 +222,7 @@ const CadastroPJ = (props: any) => {
                                 options={representantesLegaisOptions}
                                 valueMulti={representanteslegais}
                                 handleChange={handleChange}
-                                
+
 
                             />
                         </Grid>
@@ -307,7 +296,7 @@ const CadastroPJ = (props: any) => {
 
                                     });
 
-                            }}  startIcon={<SearchIcon />}>Buscar CEP</Button>}
+                            }} startIcon={<SearchIcon />}>Buscar CEP</Button>}
                         </Grid>
 
 
@@ -381,7 +370,7 @@ const CadastroPJ = (props: any) => {
                         </IconButton>
                     </Grid>
                     <Grid item>
-                        {<Button variant="contained" type="submit"    startIcon={<SaveIcon />}>Salvar</Button>}
+                        {<Button variant="contained" type="submit" startIcon={<SaveIcon />}>Salvar</Button>}
                     </Grid>
                     <Grid item>
                         <Button

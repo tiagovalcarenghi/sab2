@@ -8,8 +8,7 @@ export const initialValuesPJ = {
     complemento: '',
     uf: '',
     localidade: '',
-    representantesLegais: [''], 
-    nomeEmpresarialFiltro: '',
+    representantesLegais: [''],     
     cnpjFiltro: '',
   }
   
@@ -24,8 +23,7 @@ export const initialValuesPJ = {
     complemento: string;
     uf: string | undefined;
     localidade: string | undefined;
-    representantesLegais: string[];
-    nomeEmpresarialFiltro: string;
+    representantesLegais: string[];    
     cnpjFiltro: string;
   }
 

@@ -16,8 +16,7 @@ export const initialValuesPF = {
   numero: '',
   complemento: '',
   localidade: '',
-  uf: '',
-  nomeCompletoFiltro: '',
+  uf: '',  
   cpfFiltro: '',
 }
 
@@ -41,7 +40,6 @@ export interface FormValuesPessoaPF {
   complemento: string;
   uf: string | undefined;
   localidade: string | undefined;
-  nomeCompletoFiltro: string;
   cpfFiltro: string,
 }
 

@@ -22,9 +22,32 @@ export const pessoaFisicaOptions = [
     { value: 4, label: "Rua Amapá, 180 Casa 2" },
   ];
   
+
+  export const contasOptions = [
+    { value: 1, label: "Conta 01" },
+    { value: 2, label: "Conta 02" },
+    { value: 3, label: "Conta 03" },
+  ];
+
+
+  export const contasCompCadastradasOptions = [
+    { value: 1, label: "Rua Ubijarara Cardoso, 158" },
+    { value: 2, label: "Bradesco" },
+    { value: 3, label: "Jack Black" },
+  ];
+  
+
+  export const centroDeCustoOptions = [
+    { value: 1, label: "Intermediação" },
+    { value: 2, label: "Locação" },
+    { value: 3, label: "Prestação de Serviços" },
+  ];
   
   
 
+  
+  
+  ////==========================================/////
   export const baseContasComplementaresOptions = [
     { value: 1, label: "Rua Amapá, 180 Casa 2", cdCadatro: 12, cdTipoContaComp: 3},
     { value: 2, label: "Tiago Amaral Valcarenghi" , cdCadatro: 1 , cdTipoContaComp: 1},
@@ -37,5 +60,5 @@ export const pessoaFisicaOptions = [
     { value: 2, label: "Pessoa Jurídica"},
     { value: 3, label: "Endereço"},    
   ];
-  
+ ////==========================================///// 
   

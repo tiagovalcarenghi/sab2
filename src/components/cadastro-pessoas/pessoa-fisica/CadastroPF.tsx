@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { FormInpuTextCEP, FormInputMask, FormInputText } from "../../form-components/FormInput";
 import { estadoCivilOptions, FormValuesPessoaPF, initialValuesPF } from "../../../utils/cadastro-pessoas/constantspf";
-import { Button, Divider, Grid, IconButton, Paper, } from "@mui/material";
+import { Button, Grid, IconButton, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
 import axios from "axios";
@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
-import { MySelect } from "../../form-components/FormInputDropdown";
+import { MyAutoComplete, MySelect } from "../../form-components/FormInputDropdown";
 import { SelectChangeEvent } from '@mui/material/Select';
 import SearchIcon from '@mui/icons-material/Search';
 import SaveIcon from '@mui/icons-material/Save';
@@ -56,11 +56,8 @@ const CadastroPF = (props: any) => {
 
   const [nomeCompletoFiltro, setNomeCompletoFiltro] = useState('');
 
-  const handleChange = (event: SelectChangeEvent<typeof nomeCompletoFiltro>) => {
-      const {
-          target: { value },
-      } = event;
-      setNomeCompletoFiltro(value);
+  const handleChange = (event: any, newValue: string) => {
+    setNomeCompletoFiltro(newValue);
   };
 
 
@@ -118,13 +115,13 @@ const CadastroPF = (props: any) => {
 
           <Grid item xs={4}>
 
-          <MySelect
-                                label="Pessoa"
-                                options={pessoaFisicaOptions}
-                                value={nomeCompletoFiltro}
-                                handleChange={handleChange}
-                                
-                            />
+            <MyAutoComplete
+              label="Pessoa"
+              options={pessoaFisicaOptions}
+              value={nomeCompletoFiltro}
+              handleChange={handleChange}
+
+            />
 
           </Grid>
 
@@ -153,37 +150,16 @@ const CadastroPF = (props: any) => {
 
           <Grid item xs={3}>
 
-            {<Button color="primary"  variant="contained"
+            {<Button color="primary" variant="contained"
+
+              onClick={(event: any,) => {
+
+                alert(JSON.stringify(nomeCompletoFiltro) + '\n cpffiltro: ' + formik.values.cpfFiltro);
+
+              }}
 
 
-            // onClick={(event: any) => {
-
-            //   event.preventDefault();
-
-            //   setAddressData(undefined);
-            //   setAddressData(initialValuesPF);
-            //   axios(`${BASE_URL}/${formik.values.cep}/json`)
-            //     .then(response => {
-            //       setAddressData(response.data)
-
-
-            //     })
-            //     .catch(() => {
-
-            //       Swal.fire({
-            //         title: 'Atenção',
-            //         text: 'CEP inválido ou incompleto.',
-            //         icon: 'error',
-            //         confirmButtonText: 'OK'
-            //       })
-
-
-            //     });
-
-            // }}
-
-
-            startIcon={<SearchIcon />}>
+              startIcon={<SearchIcon />}>
               Filtrar
             </Button>}
 
@@ -243,7 +219,7 @@ const CadastroPF = (props: any) => {
                 options={estadoCivilOptions}
                 value={cdestadocivil}
                 handleChange={handleChange2}
-               
+
 
               />
             </Grid>
@@ -437,8 +413,8 @@ const CadastroPF = (props: any) => {
 
               }}
 
-              startIcon={<SearchIcon />}>
-                
+                startIcon={<SearchIcon />}>
+
                 Buscar CEP</Button>}
             </Grid>
 
@@ -513,7 +489,7 @@ const CadastroPF = (props: any) => {
             </IconButton>
           </Grid>
           <Grid item>
-            {<Button variant="contained" type="submit"   startIcon={<SaveIcon />}> Salvar</Button>}
+            {<Button variant="contained" type="submit" startIcon={<SaveIcon />}> Salvar</Button>}
           </Grid>
           <Grid item>
             <Button
@@ -531,8 +507,8 @@ const CadastroPF = (props: any) => {
           </Grid>
 
           <Grid item>
-                        {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
-                    </Grid>
+            {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
+          </Grid>
         </Grid>
 
 

@@ -2,7 +2,7 @@ export const initialValuesCadContas = {
     nomeConta: '',
     tipoConta: '',
     saldoInicial: '',
-    tipoSaldoInicial: '',
+    tipoSaldoInicial: '',    
   }
   
   

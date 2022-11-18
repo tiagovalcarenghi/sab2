@@ -3,6 +3,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { FormSelectProps } from './FormSelectProps';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
 
 
 
@@ -46,7 +49,7 @@ export const MySelectMultiple = ({ options, handleChange, label, valueMulti }: F
 
     return (
         <div>
-            <FormControl fullWidth  size="small">
+            <FormControl fullWidth size="small">
                 <InputLabel id="demo-controlled-open-select-label">{label}</InputLabel>
                 <Select
                     fullWidth
@@ -71,5 +74,54 @@ export const MySelectMultiple = ({ options, handleChange, label, valueMulti }: F
                 </Select>
             </FormControl>
         </div>
+    );
+}
+
+
+
+
+
+export const MyAutoComplete = ({ options, handleChange, label, value }: FormSelectProps) => {
+
+    return (
+
+
+        <Autocomplete
+
+            fullWidth
+            id="combo-box-demo"
+            size="small"
+            value={value}
+            options={options}
+            onChange={handleChange}
+            //   inputValue={inputValue}
+            //   onInputChange={(event, newInputValue) => {
+            //     setInputValue(newInputValue);
+            //   }}
+
+
+            renderInput={(params) => (
+                <TextField
+                    {...params}                   
+                    label={label}
+                    placeholder="Buscar"
+                />
+            )}
+
+
+
+        />
+
+        //fullWidth
+        //value={value}
+        //onChange={handleChange}
+        //size="small"
+        //labelId="demo-select-small"
+        //id="demo-select-small"
+        //label={label}
+
+
+
+
     );
 }

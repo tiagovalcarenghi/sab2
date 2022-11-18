@@ -5,8 +5,7 @@ export const initialValuesEndereco = {
     numero: '',
     complemento: '',
     localidade: '',
-    uf: '',
-    enderecoFiltro: ''
+    uf: ''    
   }
   
   
@@ -18,7 +17,6 @@ export const initialValuesEndereco = {
     complemento: string;
     uf: string | undefined;
     localidade: string | undefined;
-    enderecoFiltro: string;
   }
   
   

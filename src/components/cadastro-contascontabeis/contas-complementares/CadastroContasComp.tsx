@@ -3,14 +3,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from "formik";
 import { useState } from "react";
 import * as yup from 'yup';
-import { MySelect } from "../../form-components/FormInputDropdown";
+import { MyAutoComplete, MySelect } from "../../form-components/FormInputDropdown";
 import { FormInputText } from "../../form-components/FormInput";
 import SaveIcon from '@mui/icons-material/Save';
 import { initialValuesCadContas, tipoContaOptions, tipoSaldoOptions } from "../../../utils/cadastro-contascontabeis/contantscontas";
 import { initialValuesCadContasComp } from "../../../utils/cadastro-contascontabeis/contantscontascomp";
 import { FormCheckBox } from "../../form-components/FormCheckBox";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { baseContasComplementaresOptions } from "../../../utils/constantscadastros";
+import { baseContasComplementaresOptions, contasCompCadastradasOptions } from "../../../utils/constantscadastros";
 
 
 const CadastroContasComp = (props: any) => {
@@ -27,7 +27,7 @@ const CadastroContasComp = (props: any) => {
     });
 
 
-    
+
 
     const [cdContaComplementar, setCdContaComplementar] = useState('');
 
@@ -44,6 +44,13 @@ const CadastroContasComp = (props: any) => {
 
     const handleChange2 = (event: React.ChangeEvent<HTMLInputElement>) => {
         setChecked(event.target.checked);
+    };
+
+
+    const [nomeContaCompFiltro, setNomeContaCompFiltro] = useState('');
+
+    const handleChange3 = (event: any, newValue: string) => {
+        setNomeContaCompFiltro(newValue);
     };
 
 
@@ -72,6 +79,42 @@ const CadastroContasComp = (props: any) => {
         <form onSubmit={formik.handleSubmit}>
 
             <ThemeProvider theme={theme}>
+
+
+                <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+
+                    <Grid item xs={4}>
+
+                        <MyAutoComplete
+                            label="Contas Complementares Salvas"
+                            options={contasCompCadastradasOptions}
+                            value={nomeContaCompFiltro}
+                            handleChange={handleChange3}
+
+                        />
+
+                    </Grid>
+
+                    <Grid item xs={3}>
+
+                    
+
+                        {<Button color="primary" variant="outlined"
+
+                            onClick={(event: any,) => {
+
+                                alert(JSON.stringify(nomeContaCompFiltro));
+
+                            }}
+
+
+                            startIcon={<DeleteIcon />}>
+                            Excluir
+                        </Button>}
+
+                    </Grid>
+
+                </Grid>
 
 
                 <Paper
@@ -108,9 +151,9 @@ const CadastroContasComp = (props: any) => {
                             <FormCheckBox
                                 checked={checked}
                                 onChange={handleChange2}
-                                value={checked}       
+                                value={checked}
                                 label="Caso, conta seja banco, favor marcar essa opção."
-                                labelPlacement="end"                        
+                                labelPlacement="end"
 
                             />
 
@@ -135,10 +178,6 @@ const CadastroContasComp = (props: any) => {
 
                     <Grid item>
                         {<Button variant="contained" type="submit" startIcon={<SaveIcon />}>Salvar</Button>}
-                    </Grid>
-
-                    <Grid item>
-                        {<Button variant="outlined" startIcon={<DeleteIcon />}>Excluir</Button>}
                     </Grid>
 
                 </Grid>
