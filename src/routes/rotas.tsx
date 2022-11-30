@@ -10,6 +10,7 @@ import Pessoas from '../pages/main-menu/cadastro/pessoas/Pessoas';
 import Usuarios from '../pages/main-menu/cadastro/usuarios/Usuarios';
 import Are from '../pages/main-menu/operacoes/are/Are';
 import ContratoLocacao from '../pages/main-menu/operacoes/contrato-locacao/ContratoLocacao';
+import CadastroContratoCV from '../pages/main-menu/operacoes/contratocv/CadastroContratoCV';
 import ContratoCV from '../pages/main-menu/operacoes/contratocv/ContratoCV';
 import LancamentoBancos from '../pages/main-menu/operacoes/lancamento-bancos/LancamentoBancos';
 import LancamentoContabil from '../pages/main-menu/operacoes/lancamento-contabil/LancamentoContabil';
@@ -34,6 +35,7 @@ const Rotas = () => useRoutes([
     { path: "cadastro/enderecos", element: <Enderecos /> },
     { path: "operacoes/contrato-locacao", element: <ContratoLocacao /> },
     { path: "operacoes/contratocv", element: <ContratoCV /> },
+    { path: "operacoes/cadastrocontratocv", element: <CadastroContratoCV /> },
     { path: "operacoes/lancamento-bancos", element: <LancamentoBancos /> },
     { path: "operacoes/lancamento-contabil", element: <LancamentoContabil /> },
     { path: "operacoes/ordem-de-servico", element: <OrdedemServico /> },

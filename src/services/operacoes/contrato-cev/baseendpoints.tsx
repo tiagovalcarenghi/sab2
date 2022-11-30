@@ -1,0 +1,1 @@
+export const OPERACOES_CEV_API = process.env.REACT_APP_BACKEND;

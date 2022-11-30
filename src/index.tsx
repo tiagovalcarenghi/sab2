@@ -4,8 +4,7 @@ import './index.css';
 import Login from './pages/login/Login';
 import MainMenu from './pages/main-menu/MainMenu';
 import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'
-import store from './redux/store';
+import { criarServidor } from './services/mirage-server';
 
 
 
@@ -16,19 +15,19 @@ const root = ReactDOM.createRoot(
 
 const ambiente = process.env.NODE_ENV;
 if (ambiente !== "production") {
-  //criarServidor({ environment: ambiente });
+  criarServidor({ environment: ambiente });
 }
 
 
 root.render(
-  //<Provider store={store}>
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/main-menu/*" element={<MainMenu />} />
-      </Routes>
-    </BrowserRouter>
-  //</Provider>
+
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/main-menu/*" element={<MainMenu />} />
+    </Routes>
+  </BrowserRouter>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
