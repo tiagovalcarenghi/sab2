@@ -1,4 +1,4 @@
-import CadContratoCeV from "../../../../components/operacoes-contrato-cev/CadContratoCeV";
+import PageCadastroCeV from "../../../../components/operacoes-contrato-cev/PageCadastroCeV";
 
 
 
@@ -6,7 +6,7 @@ import CadContratoCeV from "../../../../components/operacoes-contrato-cev/CadCon
 const CadastroContratoCV = (props: any) => {
 
     return (
-        <CadContratoCeV />
+        <PageCadastroCeV />
     );
 
 }

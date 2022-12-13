@@ -7,6 +7,8 @@ import { FormInputText } from "../form-components/FormInput";
 import { initialValuesOpeContratoCeV } from "../../utils/operacoes-contrato-cev/constantsopecontratocev";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
+import { useParams } from "react-router-dom";
+import { boolean } from "yup/lib/locale";
 
 
 const CadastroCeVFinal = (props: any) => {
@@ -23,6 +25,7 @@ const CadastroCeVFinal = (props: any) => {
     });
 
 
+
     const CadCdCSchema = yup.object().shape({
         numeroContrato: yup.string().required('Informe o centro de custo.'),
         cdEndereco: yup.string().required('Informe o centro de custo.'),
@@ -30,16 +33,7 @@ const CadastroCeVFinal = (props: any) => {
     });
 
 
-    // const [nomeCentrodeCustoFiltro, setNomeCentrodeCustoFiltro] = useState('');
-
-    // const handleChange = (event: any, newValue: string) => {
-    //     setNomeCentrodeCustoFiltro(newValue);
-    // };
-
-
     const { contrato, salvar } = props;
-
-
 
     const formik = useFormik({
         initialValues: contrato || initialValuesOpeContratoCeV,
@@ -56,6 +50,7 @@ const CadastroCeVFinal = (props: any) => {
             alert(JSON.stringify(values, null, 2));
         },
     });
+
 
 
 
@@ -82,19 +77,19 @@ const CadastroCeVFinal = (props: any) => {
                             <FormInputText
                                 name="numeroContrato"
                                 label="numeroContrato"
-                                values={formik.values.numeroContrato}
+                                values={contrato.numeroContrato}
                                 onChange={formik.handleChange}
                                 helpertext={formik.touched.numeroContrato && formik.errors.numeroContrato}
                                 error={formik.touched.numeroContrato && Boolean(formik.errors.numeroContrato)} />
                         </Grid>
                         <Grid item xs={11}>
                             <FormInputText
-                                name="cdEndereco"
-                                label="cdEndereco"
-                                values={formik.values.cdEndereco}
+                                name="descEndereco"
+                                label="descEndereco"
+                                values={contrato.descEndereco}
                                 onChange={formik.handleChange}
-                                helpertext={formik.touched.cdEndereco && formik.errors.cdEndereco}
-                                error={formik.touched.cdEndereco && Boolean(formik.errors.cdEndereco)} />
+                                helpertext={formik.touched.descEndereco && formik.errors.descEndereco}
+                                error={formik.touched.descEndereco && Boolean(formik.errors.descEndereco)} />
                         </Grid>
 
                         <Grid container spacing={2} justifyContent="flex-end" marginTop={1}>

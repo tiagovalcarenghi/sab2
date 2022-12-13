@@ -1,23 +1,14 @@
-import { Button, Grid, Paper, SelectChangeEvent } from "@mui/material";
+import { Button, Grid, Paper } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useFormik } from "formik";
 import { useEffect, useState } from "react";
-
-import * as yup from 'yup';
-import SaveIcon from '@mui/icons-material/Save';
-import DeleteIcon from '@mui/icons-material/Delete';
-import { enderecoOptions } from "../../utils/constantscadastros";
-import { MyAutoComplete } from "../form-components/FormInputDropdown";
-import { FormInputText } from "../form-components/FormInput";
-import { initialValuesOpeContratoCeV } from "../../utils/operacoes-contrato-cev/constantsopecontratocev";
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import ListagemContratoCeV from "./ListagemContratoCeV";
 import ContratosCeVService from '../../services/operacoes/contrato-cev/contratoCeV';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
-const OperacoesContratoCeV = (props: any) => {
+const OperacoesContratoCeV = () => {
 
 
     const theme = createTheme({
@@ -31,7 +22,7 @@ const OperacoesContratoCeV = (props: any) => {
     });
 
     const [contratos, setContratos] = useState([]);
-  
+
     useEffect(() => {
         console.log('passou pelo useeffect');
         carregarContratos();
@@ -41,14 +32,22 @@ const OperacoesContratoCeV = (props: any) => {
     const carregarContratos = async () => {
         const contratos = await ContratosCeVService.buscarContratos();
         setContratos(contratos);
-    }   
-    
+    }
 
 
-    const excluirContrato = (contrato:any) => {
+
+    const excluirContrato = (contrato: any) => {
         ContratosCeVService.excluirContrato(contrato.id).then(() => carregarContratos());
     }
-    
+
+
+    const navigate = useNavigate();
+
+
+    const navigateToComponent = (id: any) => {
+        navigate('../operacoes/pagecadastrocontratocv', { state: { id: id } });
+    }
+
 
     return (
 
@@ -70,7 +69,7 @@ const OperacoesContratoCeV = (props: any) => {
                     <Grid item xs={4}>
 
                         <Grid item>
-                            {<Button variant="outlined" component={Link} to="../operacoes/cadastrocontratocv"  startIcon={<AddBoxIcon />}>Novo Contrato</Button>}
+                            {<Button variant="outlined" onClick={() => { navigateToComponent(null) }} startIcon={<AddBoxIcon />}>Novo Contrato</Button>}
                         </Grid>
 
                     </Grid>
@@ -82,7 +81,7 @@ const OperacoesContratoCeV = (props: any) => {
 
 
                     <Grid item xs={12}>
-                        <ListagemContratoCeV contratos={contratos}  excluirContrato ={excluirContrato} />
+                        <ListagemContratoCeV contratos={contratos} excluirContrato={excluirContrato} />
                     </Grid>
 
 

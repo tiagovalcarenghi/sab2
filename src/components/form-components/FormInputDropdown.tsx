@@ -93,12 +93,7 @@ export const MyAutoComplete = ({ options, handleChange, label, value }: FormSele
             size="small"
             value={value}
             options={options}
-            onChange={handleChange}
-            //   inputValue={inputValue}
-            //   onInputChange={(event, newInputValue) => {
-            //     setInputValue(newInputValue);
-            //   }}
-
+            onChange={handleChange}     
 
             renderInput={(params) => (
                 <TextField
@@ -111,14 +106,6 @@ export const MyAutoComplete = ({ options, handleChange, label, value }: FormSele
 
 
         />
-
-        //fullWidth
-        //value={value}
-        //onChange={handleChange}
-        //size="small"
-        //labelId="demo-select-small"
-        //id="demo-select-small"
-        //label={label}
 
 
 

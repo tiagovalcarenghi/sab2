@@ -1,23 +1,42 @@
 import { Server, Model } from "miragejs";
 import * as baseendpoints from './operacoes/contrato-cev/baseendpoints';
 
+
+
+function createData(
+    id: number,
+    numeroContrato: string,
+    descEndereco: string,
+
+) {
+    return { id, numeroContrato, descEndereco };
+}
+
+
+
 export const contratos = [
 
-    {
-        id: 1,
-        numeroContrato: '10',
-        cdEndereco: 'Rua Antônio Carlos, 85'
-    },
-    {
-        id: 2,
-        numeroContrato: '12',
-        cdEndereco: 'Avenida Fernando Ferrari, 1098'
-    },
-    {
-        id: 3,
-        numeroContrato: '22',
-        cdEndereco: 'Rua Santos, 102 ap 402'
-    }
+    createData(
+        1,
+        '10',
+        'Rua Antônio Carlos, 85',
+    ),
+        
+
+    createData(
+        2,
+        '12',
+        'Avenida Fernando Ferrari, 1098',
+    ),
+
+
+    createData(
+        3,
+        '22',
+        'Rua Santos, 102 ap 402',
+    ),
+
+
 ]
 
 export function criarServidor({ environment = 'test' } = {}) {
@@ -31,7 +50,7 @@ export function criarServidor({ environment = 'test' } = {}) {
 
         routes() {
 
-            let name:string = baseendpoints.OPERACOES_CEV_API!;  
+            let name: string = baseendpoints.OPERACOES_CEV_API!;
             this.namespace = name;
 
             this.get("/contratoscev", schema => {
@@ -58,22 +77,23 @@ export function criarServidor({ environment = 'test' } = {}) {
             });
 
 
-            this.del("/contratoscev/:id", (schema, request) => {        
-                let id = request.params.id;        
-                let post = schema.findBy("contrato", {id: id})       
-                if(post !== null)          
-                     post.destroy();       
-                return schema.all("contrato");      
-           });   
+            this.del("/contratoscev/:id", (schema, request) => {
+                let id = request.params.id;
+                let post = schema.findBy("contrato", { id: id })
+                if (post !== null)
+                    post.destroy();
+                return schema.all("contrato");
+            });
 
 
 
         },
         seeds(server) {
+
             server.db.loadData({
-                contratos: contratos
+                contratos
             });
-        }
+        },
     });
 }
 
