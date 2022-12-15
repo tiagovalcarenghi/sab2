@@ -1,5 +1,6 @@
 import { useState, createContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { createContratoCeV, createUserAdmin, createUserPadrao } from "./storage";
 
 
 export const AuthContext = createContext();
@@ -18,38 +19,30 @@ export const AuthProvider = ({ children }) => {
         if (usuario && usersStorage) {
 
             const hasUser = JSON.parse(usersStorage)?.filter(
-                (user) => user.email === JSON.parse(usuario).email
+                (user) => user.usuario === JSON.parse(usuario).usuario
             );
 
             if (hasUser) setUser(hasUser[0])
 
         } else {
 
-            const newAdmin = [{
-                id: 1,
-                nameUser: 'Administrador',
-                email: 'admin@sab.com.br',
-                tipoUser: 'ADMIN',
-                password: 'admin'
-            }];
-
-            localStorage.setItem('users_db', JSON.stringify(newAdmin))
+            localStorage.setItem('users_db', JSON.stringify(createUserAdmin))
+            localStorage.setItem('users_db', JSON.stringify(createUserPadrao))
 
 
-            const newUser = [...JSON.parse(localStorage.getItem('users_db')), {
-                id: 2,
-                nameUser: 'Usuário',
-                email: 'user@sab.com.br',
-                tipoUser: 'USER',
-                password: 'user'
-            }];
-
-            localStorage.setItem('users_db', JSON.stringify(newUser))
         }
 
+        carregarStorage();
         setLoading(false);
     }, [])
 
+
+
+    const carregarStorage = async () => {       
+        
+        localStorage.setItem('contratocev_db', JSON.stringify(createContratoCeV))
+
+    }
 
 
     const login = (email, password) => {

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./contexts/auth";
 import Enderecos from "./pages/main-menu/cadastro/enderecos/Enderecos";
-import MainMenu from "./pages/main-menu";
+import MainMenu from "./pages/MainMenuPage/AppMenu";
 import CentrodeCusto from '../pages/main-menu/cadastro/contas-contabeis/CentrodeCusto';
 import Contas from '../pages/main-menu/cadastro/contas-contabeis/Contas';
 import ContasComplementar from '../pages/main-menu/cadastro/contas-contabeis/ContasComplementar';
@@ -27,8 +27,8 @@ import Dre from '../pages/main-menu/relatorios/dre/Dre';
 import Lancamento from '../pages/main-menu/relatorios/lancamento/Lancamento';
 import LivroRazao from '../pages/main-menu/relatorios/livro-razao/LivroRazao';
 import PesquisaPorCampo from '../pages/main-menu/relatorios/pesquisa-por-campo/PesquisaPorCampo';
-import ContratoCeVPage from "./pages/main-menu/operacoes/ContratoCeVPage";
-import CadastroCeVPage from "./pages/main-menu/operacoes/ContratoCeVPage/CadastroCeVPage";
+import ContratoCeVPage from "./pages/MainMenuPage/operacoes/ContratoCeVPage";
+import CadastroCeVPage from "./pages/MainMenuPage/operacoes/ContratoCeVPage/CadastroCeVPage";
 import LoginPage from "./pages/LoginPage";
 
 const AppRoutes = () => {

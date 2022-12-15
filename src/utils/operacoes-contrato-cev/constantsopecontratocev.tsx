@@ -1,4 +1,4 @@
-export const initialValuesOpeContratoCeV = {
+export const OPERACOESCEVINITIAL = {
   id: '',
   numeroContrato: '',
   cdEndereco: '',

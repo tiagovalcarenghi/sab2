@@ -15,12 +15,12 @@ const ContratoCeVPage = (props) => {
 
     useEffect(() => {
 
-        // setUsersdb(JSON.parse(localStorage.getItem('users_db')));
+        setContratoCeVList(JSON.parse(localStorage.getItem('contratocev_db')));
 
-        // const usuario = JSON.parse(localStorage.getItem('user_storage'));
-        // if (usuario) {
-        //     usuario.tipoUser === 'ADMIN' ? setDisable(false) : setDisable(true);
-        // }
+        const usuario = JSON.parse(localStorage.getItem('user_storage'));
+        if (usuario) {
+            usuario.tipoUser === 'ADMIN' ? setDisable(false) : setDisable(true);
+        }
 
     }, []);
 
@@ -31,29 +31,14 @@ const ContratoCeVPage = (props) => {
 
     const deleteContrato = (data) => {
 
-        // let items = JSON.parse(localStorage.getItem("users_db"));
-        // items = items.filter((item) => item.id !== data.id);
-        // localStorage.setItem("users_db", JSON.stringify(items));
-        // if (items.length === 0) {
-        //     localStorage.removeItem("users_db");
-        // }
-        // setUsersdb(JSON.parse(localStorage.getItem("users_db")));
+        let items = JSON.parse(localStorage.getItem("contratocev_db"));
+        items = items.filter((item) => item.id !== data.id);
+        localStorage.setItem("contratocev_db", JSON.stringify(items));
+        if (items.length === 0) {
+            localStorage.removeItem("contratocev_db");
+        }
+        setContratoCeVList(JSON.parse(localStorage.getItem("contratocev_db")));
     }
-
-
-    // const filtraUsers = (userName) => {
-
-    //     if (!userName) {
-    //         setUsersdb(JSON.parse(localStorage.getItem('users_db')));
-    //         return;
-    //     }
-
-    //     let items = JSON.parse(localStorage.getItem("users_db"));
-    //     items = items?.filter((item) => item.nameUser === userName);
-    //     setUsersdb(items);
-
-    // }
-
 
 
     return (
