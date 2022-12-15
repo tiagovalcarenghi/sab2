@@ -1,17 +1,14 @@
-import { Button, Grid, IconButton, Paper, } from "@mui/material";
+import { Button, Grid, Paper, } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useFormik } from "formik";
 import * as yup from 'yup';
 import SaveIcon from '@mui/icons-material/Save';
-import { FormInputText } from "../form-components/FormInput";
-import { initialValuesOpeContratoCeV } from "../../utils/operacoes-contrato-cev/constantsopecontratocev";
-import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { FormInputText } from "../../form-components/FormInput";
+import { initialValuesOpeContratoCeV } from "../../../utils/operacoes-contrato-cev/constantsopecontratocev";
 import ReplayCircleFilledIcon from '@mui/icons-material/ReplayCircleFilled';
-import { useParams } from "react-router-dom";
-import { boolean } from "yup/lib/locale";
 
 
-const CadastroCeVFinal = (props: any) => {
+const CadastroContratoCeV = (props) => {
 
 
     const theme = createTheme({
@@ -33,21 +30,19 @@ const CadastroCeVFinal = (props: any) => {
     });
 
 
-    const { contrato, salvar } = props;
+    const { contrato, salvar, limpar } = props;
 
     const formik = useFormik({
+        enableReinitialize: true,
         initialValues: contrato || initialValuesOpeContratoCeV,
         validationSchema: CadCdCSchema,
-        onSubmit: (actions, values) => {
-
+        onSubmit: (values) => {
 
             console.log("values", values);
             salvar(values);
-            actions.resetForm();
-            setTimeout(() => actions.setSubmitting(false), 5000);
-
-
+            formik.resetForm();         
             alert(JSON.stringify(values, null, 2));
+
         },
     });
 
@@ -59,8 +54,6 @@ const CadastroCeVFinal = (props: any) => {
         <form onSubmit={formik.handleSubmit}>
 
             <ThemeProvider theme={theme}>
-
-
 
 
                 <Paper
@@ -101,9 +94,10 @@ const CadastroCeVFinal = (props: any) => {
                             <Grid item>
                                 <Button
 
-                                    onClick={(event: any) => {
-                                        event.preventDefault();
+                                    onClick={(e) => {
+                                        e.preventDefault();
                                         formik.resetForm();
+                                        limpar();
                                     }}
                                     variant={"outlined"} startIcon={<ReplayCircleFilledIcon />}>Limpar Dados</Button>
                             </Grid>
@@ -125,4 +119,4 @@ const CadastroCeVFinal = (props: any) => {
     );
 };
 
-export default CadastroCeVFinal;
+export default CadastroContratoCeV;

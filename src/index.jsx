@@ -1,17 +1,10 @@
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import App from './App';
 import './index.css';
-import Login from './pages/login/Login';
-import MainMenu from './pages/main-menu/MainMenu';
 import reportWebVitals from './reportWebVitals';
 import { criarServidor } from './services/mirage-server';
 
-
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const ambiente = process.env.NODE_ENV;
 if (ambiente !== "production") {
@@ -21,12 +14,7 @@ if (ambiente !== "production") {
 
 root.render(
 
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/main-menu/*" element={<MainMenu />} />
-    </Routes>
-  </BrowserRouter>
+  <App />
 
 );
 

@@ -1,7 +1,7 @@
 import AppMenu from "../../components/main-menu/AppMenu";
 import Rotas from "../../routes/rotas";
 
-const MainMenu = () => {
+const MainMenuPage = () => {
 
 
     return (
@@ -15,4 +15,4 @@ const MainMenu = () => {
 
 }
 
-export default MainMenu;
+export default MainMenuPage;
