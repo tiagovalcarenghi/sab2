@@ -16,7 +16,11 @@ export const AuthProvider = ({ children }) => {
         const usuario = localStorage.getItem('user_storage');
         const usersStorage = localStorage.getItem('users_db');
 
+        
+
         if (usuario && usersStorage) {
+
+            console.log('1');
 
             const hasUser = JSON.parse(usersStorage)?.filter(
                 (user) => user.usuario === JSON.parse(usuario).usuario
@@ -26,9 +30,10 @@ export const AuthProvider = ({ children }) => {
 
         } else {
 
-            localStorage.setItem('users_db', JSON.stringify(createUserAdmin))
-            localStorage.setItem('users_db', JSON.stringify(createUserPadrao))
+            console.log('2');
 
+            localStorage.setItem('users_db', JSON.stringify(createUserAdmin));
+            //localStorage.setItem('users_db', JSON.stringify(createUserPadrao));
 
         }
 
@@ -40,24 +45,24 @@ export const AuthProvider = ({ children }) => {
 
     const carregarStorage = async () => {       
         
-        localStorage.setItem('contratocev_db', JSON.stringify(createContratoCeV))
+        localStorage.setItem('contratocev_db', JSON.stringify(createContratoCeV));
 
     }
 
 
-    const login = (email, password) => {
+    const login = (nameUser, password) => {
 
         const usersStorage = JSON.parse(localStorage.getItem('users_db'));
 
-        const hasUser = usersStorage?.filter((user) => user.email === email);
+        const hasUser = usersStorage?.filter((user) => user.nameUser === nameUser);
 
         if (hasUser?.length) {
-            if (hasUser[0].email === email && hasUser[0].password === password) {
+            if (hasUser[0].nameUser === nameUser && hasUser[0].password === password) {
 
                 const loggedUser = {
                     id: hasUser[0].id,
-                    nameUser: hasUser[0].nameUser,
-                    email,
+                    nameUser: nameUser,
+                    email: hasUser[0].email,
                     tipoUser: hasUser[0].tipoUser
                 }
 

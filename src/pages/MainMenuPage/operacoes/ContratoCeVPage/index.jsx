@@ -1,7 +1,7 @@
 import { Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GridContratoCeV from "../../../../components/operacoes-contrato-cev/GridContratoCeV/index.tsx";
+import GridContratoCeV from "../../../../components/operacoes-contrato-cev/GridContratoCeV";
 
 
 

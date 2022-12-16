@@ -15,6 +15,9 @@ import { useNavigate } from 'react-router-dom';
 
 //Banner SAB:
 import BannerSab from '../../assets/login/images/banner-SAB.png'; // Import using relative path
+import { useContext, useState } from 'react';
+import { AuthContext } from '../../contexts/auth';
+import { Container, Typography } from '@mui/material';
 
 const theme = createTheme({
 
@@ -35,6 +38,7 @@ const LoginPage = () => {
 
     const [usuario, setUsuario] = useState("");
     const [senha, setSenha] = useState("");
+    const [error, setError] = useState("");
 
 
     const { login } = useContext(AuthContext);

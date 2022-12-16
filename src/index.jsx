@@ -2,20 +2,11 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { criarServidor } from './services/mirage-server';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const ambiente = process.env.NODE_ENV;
-if (ambiente !== "production") {
-  criarServidor({ environment: ambiente });
-}
-
-
 root.render(
-
   <App />
-
 );
 
 // If you want to start measuring performance in your app, pass a function

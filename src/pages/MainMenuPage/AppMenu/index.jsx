@@ -22,10 +22,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+
 const AppMenu = () => {
   const classes = useStyles();
   return (
-    <Router>
+    
       <div style={{ display: 'flex' }}>
         <Drawer
           style={{ width: '220px' }}
@@ -43,7 +44,7 @@ const AppMenu = () => {
                 <ListItemText primary={"Home"} />
               </ListItem>
             </Link>
-            <Link to="/about" className={classes.link}>
+            <Link to="/login" className={classes.link}>
               <ListItem button>
                 <ListItemIcon>
                   <InfoIcon />
@@ -53,7 +54,7 @@ const AppMenu = () => {
             </Link>
           </List>
         </Drawer>
-        <Switch>
+        {/* <Switch>
           <Route exact path="/">
             <Container>
               <Typography variant="h3" gutterBottom>
@@ -74,9 +75,9 @@ const AppMenu = () => {
               </Typography>
             </Container>
           </Route>
-        </Switch>
+        </Switch> */}
       </div>
-    </Router>
+    
   );
 }
 
